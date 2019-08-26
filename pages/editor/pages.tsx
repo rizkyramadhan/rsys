@@ -1,0 +1,37 @@
+import fetch from 'isomorphic-unfetch';
+import React, { useEffect } from 'react';
+import Container from '@components/Container';
+import dynamic from 'next/dynamic';
+const Grape = dynamic(import('@components/Grape'), {
+  ssr: false
+});
+const Page = (_props: any) => {
+  useEffect(() => {}, []);
+  return (
+    <Container>
+      <div style={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
+        <div
+          style={{
+            flexBasis: 250,
+            borderRight: '1px solid rgba(255,255,255,.2)'
+          }}
+        ></div>
+        <div style={{ flex: 1 }}>
+          <Grape  />
+        </div>
+      </div>
+    </Container>
+  );
+};
+
+Page.getInitialProps = async ({ req }: any) => {
+  if (req) {
+    const res = await fetch('https://api.github.com/repos/zeit/next.js');
+    const json = await res.json();
+    return { stars: json.stargazers_count, path: process.cwd() };
+  }
+
+  return {};
+};
+
+export default Page;

@@ -21,8 +21,19 @@ const config = convict({
     arg: 'port'
   },
   db: {
-    doc: 'database connection.',
-    format: 'object'
+    doc: 'The DB connection.',
+    format: Object,
+    default: {
+      default: {
+        driver: "mysql",
+        host: "localhost",
+        port: 80,
+        database: "rsys",
+        username: "root",
+        password: "okedeh"
+      }
+    },
+    env: 'DB_HOST'
   }
 });
 

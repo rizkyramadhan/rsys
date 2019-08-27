@@ -189,7 +189,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/Container */ "./components/Container.tsx");
 /* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/dynamic */ "next/dynamic");
 /* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_dynamic__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! mobx-react-lite */ "mobx-react-lite");
+/* harmony import */ var mobx_react_lite__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
 
 
 
@@ -203,7 +206,9 @@ const Grape = next_dynamic__WEBPACK_IMPORTED_MODULE_3___default()(() => __webpac
 });
 
 const Page = _props => {
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {}, []);
+  const state = Object(mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__["useObservable"])({
+    content: ''
+  });
   return __jsx(_components_Container__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("div", {
     style: {
       display: 'flex',
@@ -219,7 +224,9 @@ const Page = _props => {
     style: {
       flex: 1
     }
-  }, __jsx(Grape, null))));
+  }, __jsx(Grape, {
+    content: ''
+  }))));
 };
 
 Page.getInitialProps = async ({
@@ -237,7 +244,7 @@ Page.getInitialProps = async ({
   return {};
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Page);
+/* harmony default export */ __webpack_exports__["default"] = (Object(mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__["observer"])(Page));
 
 /***/ }),
 
@@ -459,6 +466,17 @@ module.exports = require("grapesjs");
 /***/ (function(module, exports) {
 
 module.exports = require("isomorphic-unfetch");
+
+/***/ }),
+
+/***/ "mobx-react-lite":
+/*!**********************************!*\
+  !*** external "mobx-react-lite" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("mobx-react-lite");
 
 /***/ }),
 

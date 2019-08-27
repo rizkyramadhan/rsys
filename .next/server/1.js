@@ -30,6 +30,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 /* harmony default export */ __webpack_exports__["default"] = (({
   id = 'grapesjs-react-editor',
+  content = '',
   components = [],
   blocks = [],
   plugins = [],
@@ -41,6 +42,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     1: setEditor
   } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(null);
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
+    if (editor) editor.setComponents(content);
+  }, [content]);
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 2000);
@@ -50,14 +54,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
         blockManager,
         storageManager,
         container: `#${id}`,
-        fromElement: false,
+        fromElement: true,
+        components: content,
         plugins: [_Grape_Blocks_Basic_index__WEBPACK_IMPORTED_MODULE_5__["default"], ...plugins]
-      });
-      e.Panels.removeButton('views', 'open-sm'); // e.Panels.removeButton('views', 'open-tm');
-
-      e.Panels.removePanel('views-container');
-      setTimeout(() => {
-        console.log(e.Commands.get('open-layers'));
       });
       const defaultType = e.DomComponents.getType('default');
       const defaultModel = defaultType.model;
@@ -79,6 +78,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
         e.BlockManager.add(block.id, block);
       });
       setEditor(e);
+      e.Panels.removeButton('options', 'export-template');
+      e.Panels.removeButton('views', 'open-sm');
+      e.Panels.removePanel('views-container');
     } else {
       if (document) {
         document.getElementById(id).append(editor.render());

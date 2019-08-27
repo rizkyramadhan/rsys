@@ -2,11 +2,14 @@ import fetch from 'isomorphic-unfetch';
 import React, { useEffect } from 'react';
 import Container from '@components/Container';
 import dynamic from 'next/dynamic';
+import { observer, useObservable } from 'mobx-react-lite';
 const Grape = dynamic(import('@components/Grape'), {
   ssr: false
 });
 const Page = (_props: any) => {
-  useEffect(() => {}, []);
+  const state = useObservable({
+    content: ''
+  });
   return (
     <Container>
       <div style={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
@@ -17,7 +20,7 @@ const Page = (_props: any) => {
           }}
         ></div>
         <div style={{ flex: 1 }}>
-          <Grape  />
+          <Grape content={''} />
         </div>
       </div>
     </Container>
@@ -34,4 +37,4 @@ Page.getInitialProps = async ({ req }: any) => {
   return {};
 };
 
-export default Page;
+export default observer(Page);

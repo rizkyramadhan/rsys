@@ -35,6 +35,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var _ref$id = _ref.id,
       id = _ref$id === void 0 ? 'grapesjs-react-editor' : _ref$id,
+      _ref$content = _ref.content,
+      content = _ref$content === void 0 ? '' : _ref$content,
       _ref$components = _ref.components,
       components = _ref$components === void 0 ? [] : _ref$components,
       _ref$blocks = _ref.blocks,
@@ -49,6 +51,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
       setEditor = _useState[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    if (editor) editor.setComponents(content);
+  }, [content]);
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     setTimeout(function () {
       window.dispatchEvent(new Event('resize'));
     }, 2000);
@@ -58,14 +63,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
         blockManager: blockManager,
         storageManager: storageManager,
         container: "#".concat(id),
-        fromElement: false,
+        fromElement: true,
+        components: content,
         plugins: [_Grape_Blocks_Basic_index__WEBPACK_IMPORTED_MODULE_6__["default"]].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__["default"])(plugins))
-      });
-      e.Panels.removeButton('views', 'open-sm'); // e.Panels.removeButton('views', 'open-tm');
-
-      e.Panels.removePanel('views-container');
-      setTimeout(function () {
-        console.log(e.Commands.get('open-layers'));
       });
       var defaultType = e.DomComponents.getType('default');
       var defaultModel = defaultType.model;
@@ -87,6 +87,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
         e.BlockManager.add(block.id, block);
       });
       setEditor(e);
+      e.Panels.removeButton('options', 'export-template');
+      e.Panels.removeButton('views', 'open-sm');
+      e.Panels.removePanel('views-container');
     } else {
       if (document) {
         document.getElementById(id).append(editor.render());

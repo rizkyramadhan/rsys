@@ -5,6 +5,7 @@ import basic from './Grape/Blocks/Basic/index';
 
 export default ({
   id = 'grapesjs-react-editor',
+  content = '',
   components = [],
   blocks = [],
   plugins = [],
@@ -12,6 +13,10 @@ export default ({
   storageManager
 }: any) => {
   const [editor, setEditor] = useState(null);
+
+  useEffect(() => {
+    if (editor) editor.setComponents(content);
+  }, [content]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,16 +27,11 @@ export default ({
         blockManager,
         storageManager,
         container: `#${id}`,
-        fromElement: false,
+        fromElement: true,
+        components: content,
         plugins: [basic, ...plugins]
       });
 
-      e.Panels.removeButton('views', 'open-sm');
-      // e.Panels.removeButton('views', 'open-tm');
-      e.Panels.removePanel('views-container');
-      setTimeout(() => {
-        console.log(e.Commands.get('open-layers'));
-      });
       const defaultType = e.DomComponents.getType('default');
       const defaultModel = defaultType.model;
       const defaultView = defaultType.view;
@@ -57,6 +57,9 @@ export default ({
         e.BlockManager.add(block.id, block);
       });
       setEditor(e);
+      e.Panels.removeButton('options', 'export-template');
+      e.Panels.removeButton('views', 'open-sm');
+      e.Panels.removePanel('views-container');
     } else {
       if (document) {
         document.getElementById(id).append(editor.render());

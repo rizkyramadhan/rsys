@@ -2,7 +2,7 @@
   "name": "rsys",
   "scripts": {
     "dev": "node server.js",
-    "build": "next build && nexe -i server.js -o dist/rsys -r .next && cd dist && ./rsys",
+    "build": "next build && nexe -i server.js -o dist/rsys -r .next -r templates && cd dist && ./rsys",
     "start": "cross-env NODE_ENV=production node server.js"
   },
   "browser": {
@@ -21,6 +21,8 @@
     "grapesjs-blocks-basic": "^0.1.8",
     "isomorphic-unfetch": "^3.0.0",
     "knex": "^0.19.2",
+    "mobx": "^5.13.0",
+    "mobx-react-lite": "^1.4.1",
     "mssql": "^5.1.0",
     "mysql2": "^1.6.5",
     "next": "^9.0.4",

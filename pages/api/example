@@ -1,0 +1,79 @@
+** select **
+/api/select/
+{
+  "conn": "default",
+  "columns": [
+    "users.id",
+    "users.username",
+    "roles.name as rolename"
+  ],
+  "table": "users",
+  "where": [
+    {
+      "column": "users.username",
+      "operator": "=",
+      "value": "userrrr"
+    },
+    "or",
+    {
+      "column": "users.id",
+      "operator": "=",
+      "value": "1"
+    }
+  ],
+  "join": [
+    {
+    "type": "leftJoin",
+      "table": "roles",
+      "on": ["users.role_id", "roles.id"]
+      
+    }],
+  "limit": 10,
+  "offset": 0
+}
+
+** query **
+/api/query/
+{
+  "conn": "default",
+  "sql": "select * from users where id = ?",
+  "params": [1],
+}
+
+** insert **
+/api/insert/
+{
+  "conn": "default",
+  "method": "insert",
+  "table": "users",
+  "data": {
+    "username": "user",
+    "role_id": 2
+  }
+}
+
+** update **
+/api/update/
+{
+  "conn": "default",
+  "method": "update",
+  "table": "users",
+  "data": {
+    "username": "user",
+    "role_id": 2
+  },
+  "where": {
+    "id": 2
+  }
+}
+
+** delete **
+/api/delete/
+{
+  "conn": "default",
+  "method": "delete",
+  "table": "users",
+  "where": {
+    "id": 2
+  }
+}

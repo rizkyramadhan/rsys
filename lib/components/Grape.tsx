@@ -1,15 +1,16 @@
-import GrapesJS from 'grapesjs';
-import Head from 'next/head';
-import { useEffect, useState, forwardRef } from 'react';
-import basic from './Grape/Blocks/Basic/index';
+import GrapesJS from "grapesjs";
+import Head from "next/head";
+import { useEffect, useState, forwardRef } from "react";
+import basicBlocks from "./Grape/Blocks/Basic/index";
+import basicComponents from "./Grape/Components/index";
 
-import './Grape/Elements';
+import "./Grape/Elements";
 
 export default forwardRef(
   (
     {
-      id = 'grapesjs-react-editor',
-      content = '',
+      id = "grapesjs-react-editor",
+      content = "",
       components = [],
       blocks = [],
       plugins = [],
@@ -30,7 +31,7 @@ export default forwardRef(
 
     useEffect(() => {
       setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
+        window.dispatchEvent(new Event("resize"));
       }, 2000);
       if (!editor) {
         const e = GrapesJS.init({
@@ -41,49 +42,28 @@ export default forwardRef(
           components: content,
           keymaps: {
             defaults: {
-              'rsys:save': {
-                keys: '⌘+s, ctrl+s',
+              "rsys:save": {
+                keys: "⌘+s, ctrl+s",
                 handler: save
               }
             }
           },
-          plugins: [basic, ...plugins]
+          plugins: [basicBlocks, basicComponents, ...plugins]
         });
 
         const wrapperStyle = e.getWrapper().view.$el[0].style;
-        wrapperStyle.display = 'flex';
-        wrapperStyle.alignItems = 'stretch';
-        wrapperStyle.flexDirection = 'column';
+        wrapperStyle.display = "flex";
+        wrapperStyle.alignItems = "stretch";
+        wrapperStyle.flexDirection = "column";
 
-        const defaultType = e.DomComponents.getType('default');
-        const defaultModel = defaultType.model;
-        const defaultView = defaultType.view;
-        components.forEach((component: any) => {
-          e.DomComponents.addType(component.type, {
-            model: defaultModel.extend(
-              {
-                defaults: Object.assign({}, defaultModel.prototype.defaults)
-              },
-              {
-                isComponent: component.isComponent.bind(this)
-              }
-            ),
-            view: defaultView.extend({
-              events: {
-                ...component.events
-              },
-              render: component.render.bind(this)
-            })
-          });
-        });
         blocks.forEach((block: any) => {
           e.BlockManager.add(block.id, block);
         });
         setEditor(e);
         setupEditor(e);
-        e.Panels.removeButton('options', 'export-template');
-        e.Panels.removeButton('views', 'open-sm');
-        e.Panels.removePanel('views-container');
+        e.Panels.removeButton("options", "export-template");
+        e.Panels.removeButton("views", "open-sm");
+        e.Panels.removePanel("views-container");
         e.setComponents(content);
 
         if (ref) {
@@ -107,7 +87,7 @@ export default forwardRef(
     return (
       <div id={id}>
         <Head>
-          <link rel='stylesheet' href='/static/grapesjs/css/grapes.min.css' />
+          <link rel="stylesheet" href="/static/grapesjs/css/grapes.min.css" />
         </Head>
       </div>
     );

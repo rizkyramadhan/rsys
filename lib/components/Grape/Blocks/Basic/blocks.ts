@@ -5,19 +5,19 @@ export default function(editor, opt: any = {}) {
 
   const toAdd = name => blocks.indexOf(name) >= 0;
 
-  toAdd('text') &&
-    bm.add('text', {
-      label: 'Text',
+  toAdd("text") &&
+    bm.add("text", {
+      label: "Text",
       category: c.category,
-      attributes: { class: 'fa fa-text-height' },
-      content: `<text-ui/>`
+      attributes: { class: "fa fa-text-height" },
+      content: { type: "text-ui", tagName: `text-ui` }
     });
 
-  toAdd('layout') &&
-    bm.add('layout', {
-      label: 'Layout',
+  toAdd("layout") &&
+    bm.add("layout", {
+      label: "Layout",
       category: c.category,
-      attributes: { class: 'fa fa-object-ungroup' },
-      content: `<layout-ui/>`
+      attributes: { class: "fa fa-object-ungroup" },
+      content: { type: "layout-ui", tagName: `layout-ui` }
     });
 }

@@ -10,7 +10,7 @@ export default function(editor, opt: any = {}) {
       label: 'Text',
       category: c.category,
       attributes: { class: 'fa fa-text-height' },
-      content: `<text- name="Joni Joni yes papa"/>`
+      content: `<text-/>`
     });
 
   toAdd('layout') &&

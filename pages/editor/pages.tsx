@@ -1,15 +1,27 @@
 import fetch from 'isomorphic-unfetch';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Container from '@lib/components/Container';
 import dynamic from 'next/dynamic';
 import { observer, useObservable } from 'mobx-react-lite';
+import store from '@lib/store';
+import api from '@lib/api';
 const Grape = dynamic(import('@lib/components/Grape'), {
   ssr: false
 });
-const Page = (_props: any) => {
-  const state = useObservable({
-    content: ''
+let editor = null;
+const save = async () => {
+  const res = await api.post('file/save', {
+    content: editor.getHtml()
   });
+  console.log(res);
+};
+const Page = (_props: any) => {
+  useEffect(() => {
+    window.addEventListener('keydown', saveKey, false);
+    return () => {
+      window.removeEventListener('keydown', saveKey);
+    };
+  }, []);
   return (
     <Container>
       <div style={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
@@ -20,7 +32,13 @@ const Page = (_props: any) => {
           }}
         ></div>
         <div style={{ flex: 1 }}>
-          <Grape content={state.content} />
+          <Grape
+            content={store.activePage.content}
+            setupEditor={e => {
+              editor = e;
+            }}
+            save={saveKey}
+          />
         </div>
       </div>
     </Container>
@@ -38,3 +56,16 @@ Page.getInitialProps = async ({ req }: any) => {
 };
 
 export default observer(Page);
+
+const saveKey = function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) {
+    if (e._parentEvent) {
+      e._parentEvent.preventDefault();
+      e._parentEvent.stopPropagation();
+    } else {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    save();
+  }
+};

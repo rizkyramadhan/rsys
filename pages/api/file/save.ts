@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
-
+import prettier from 'prettier';
 import $ from 'cheerio';
+import { mapimport } from './mapimport';
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -16,27 +17,66 @@ export default (req, res) => {
 };
 
 const convert = json => {
-  let jsx = walk(json);
-  let imprt = {};
+  const imprt = {};
+  let jsx = walk(json, imprt);
 
-  return `
-  ${jsx}
-  `;
+  const script = `
+import React from 'react';
+${Object.keys(imprt).map(key => {
+  let named = '';
+  let n = '';
+  let deflt = imprt[key].default;
+  if (imprt[key].named) {
+    named = `{ ${imprt[key].named.join(',')} }`;
+  }
+
+  if (named && deflt) {
+    n = ',';
+  }
+
+  return `import ${deflt} ${n} ${named} from '${key}'\n`;
+})}
+
+export default () => {
+  return ${jsx || 'null'}
+}`;
+
+  return prettier.format(script, { parser: 'typescript' });
 };
 
-const walk = (json, isRoot = true) => {
+const walk = (json, imprt, isRoot = true) => {
   const result = [];
   $(json).each((idx, item) => {
     if (item.type === 'tag') {
       const tag = cap(item.name.split('-')[0]);
       const atkeys = Object.keys(item.attribs || {});
-      let single = `<${tag} ${atkeys.length > 0 &&
-        atkeys.map(key => {
-          return `${key}={${JSON.stringify(item.attribs[key])}}`;
-        })}`; 
+      let single = `<${tag} ${
+        atkeys.length > 0
+          ? atkeys.map(key => {
+              return `${key}={${JSON.stringify(item.attribs[key])}}`;
+            })
+          : ''
+      }`;
+
+      if (!!mapimport[tag]) {
+        if (!imprt[mapimport[tag].from]) {
+          imprt[mapimport[tag].from] = {
+            named: [],
+            default: ''
+          };
+        }
+        if (
+          mapimport[tag].type === 'named' &&
+          imprt[mapimport[tag].from].named.indexOf(tag) < 0
+        ) {
+          imprt[mapimport[tag].from].named.push(tag);
+        } else if (mapimport[tag].type === 'default') {
+          imprt[mapimport[tag].from].default = tag;
+        }
+      }
 
       if (item.children.length > 0) {
-        single += `>` + walk(item.children, false) + `</${tag}>`;
+        single += `>` + walk(item.children, imprt, false) + `</${tag}>`;
       } else {
         single += `/>`;
       }

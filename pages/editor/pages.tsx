@@ -13,7 +13,7 @@ const save = async () => {
   const res = await api.post('file/save', {
     content: editor.getHtml()
   });
-  console.log(res);
+  console.log(res.json);
 };
 const Page = (_props: any) => {
   useEffect(() => {

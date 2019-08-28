@@ -35,6 +35,7 @@
     "office-ui-fabric-react": "^7.27.1",
     "oracle": "^0.4.1",
     "pg": "^7.12.1",
+    "prettier": "1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "sqlite3": "^4.1.0"

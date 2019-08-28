@@ -1,13 +1,14 @@
-import GrapesJS from 'grapesjs';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import basic from './Grape/Blocks/Basic/index';
+import GrapesJS from "grapesjs";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import basicBlocks from "./Grape/Blocks/Basic/index";
+import basicTraits from "./Grape/Traits/Basic/index";
 
-import './Grape/Elements';
+import "./Grape/Elements";
 
 export default ({
-  id = 'grapesjs-react-editor',
-  content = '',
+  id = "grapesjs-react-editor",
+  content = "",
   components = [],
   blocks = [],
   plugins = [],
@@ -24,7 +25,7 @@ export default ({
 
   useEffect(() => {
     setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event("resize"));
     }, 2000);
     if (!editor) {
       const e = GrapesJS.init({
@@ -33,10 +34,10 @@ export default ({
         container: `#${id}`,
         fromElement: true,
         components: content,
-        plugins: [basic, ...plugins]
+        plugins: [basicBlocks, basicTraits, ...plugins]
       });
 
-      const defaultType = e.DomComponents.getType('default');
+      const defaultType = e.DomComponents.getType("default");
       const defaultModel = defaultType.model;
       const defaultView = defaultType.view;
       components.forEach((component: any) => {
@@ -61,9 +62,9 @@ export default ({
         e.BlockManager.add(block.id, block);
       });
       setEditor(e);
-      e.Panels.removeButton('options', 'export-template');
-      e.Panels.removeButton('views', 'open-sm');
-      e.Panels.removePanel('views-container');
+      e.Panels.removeButton("options", "export-template");
+      e.Panels.removeButton("views", "open-sm");
+      e.Panels.removePanel("views-container");
       e.setComponents(content);
     } else {
       if (document) {
@@ -83,7 +84,7 @@ export default ({
   return (
     <div id={id}>
       <Head>
-        <link rel='stylesheet' href='/static/grapesjs/css/grapes.min.css' />
+        <link rel="stylesheet" href="/static/grapesjs/css/grapes.min.css" />
       </Head>
     </div>
   );

@@ -5,19 +5,25 @@ export default function(editor, opt: any = {}) {
 
   const toAdd = name => blocks.indexOf(name) >= 0;
 
-  toAdd('text') &&
-    bm.add('text', {
-      label: 'Text',
+  toAdd("text") &&
+    bm.add("text", {
+      label: "Text",
       category: c.category,
-      attributes: { class: 'fa fa-text-height' },
-      content: `<text- name="Joni Joni yes papa"/>`
+      attributes: { class: "fa fa-text-height" },
+      content: {
+        content: `<text-ui name="Joni Joni yes papa"/>`,
+        type: `text-ui`
+      }
     });
 
-  toAdd('layout') &&
-    bm.add('layout', {
-      label: 'Layout',
+  toAdd("layout") &&
+    bm.add("layout", {
+      label: "Layout",
       category: c.category,
-      attributes: { class: 'fa fa-object-ungroup' },
-      content: `<layout-/>`
+      attributes: { class: "fa fa-object-ungroup" },
+      content: {
+        content: `<layout-ui/>`,
+        type: `layout-ui`
+      }
     });
 }

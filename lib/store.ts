@@ -1,4 +1,7 @@
 import { observable } from 'mobx';
 export default observable({
-  ready: false
+  ready: false,
+  activePage: {
+    content: ''
+  }
 });

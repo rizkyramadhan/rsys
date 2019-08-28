@@ -6,6 +6,13 @@ class Api {
     const res = await fetch(this.url + url.replace(/^\/+/g, ''), opt);
     return await res.json();
   }
+  async post(url: string, body?: any) {
+    const res = await fetch(this.url + url.replace(/^\/+/g, ''), {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+    return await res.json();
+  }
 }
 
 export default new Api();

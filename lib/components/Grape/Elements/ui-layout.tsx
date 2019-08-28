@@ -11,14 +11,13 @@ const ReactEl = observer(() => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        minHeight: 30,
+        padding: 10
       }}
       dangerouslySetInnerHTML={slot}
     />
   );
 });
 
-export default defineElement(name, ReactEl, {
-  minHeight: 30,
-  padding: 10
-});
+export default defineElement(name, ReactEl);

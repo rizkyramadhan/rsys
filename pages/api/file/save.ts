@@ -38,7 +38,6 @@ const walk = (json, isRoot = true) => {
       } else {
         single += `/>`;
       }
-
       result.push(single);
     }
   });

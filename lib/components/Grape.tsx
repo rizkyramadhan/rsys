@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useEffect, useState, forwardRef } from 'react';
 import basic from './Grape/Blocks/Basic/index';
 
-import "./Grape/Elements";
+import './Grape/Elements';
 
 export default forwardRef(
   (
@@ -80,6 +80,12 @@ export default forwardRef(
         e.Panels.removeButton('views', 'open-sm');
         e.Panels.removePanel('views-container');
         e.setComponents(content);
+        e.runCommand('open-blocks');
+
+        e.on('component:selected', m => {
+          e.runCommand('hide-blocks');
+          e.runCommand('open-tm');
+        });
 
         if (ref) {
           ref.current = editor;

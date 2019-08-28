@@ -20,7 +20,7 @@ const Page = (_props: any) => {
           }}
         ></div>
         <div style={{ flex: 1 }}>
-          <Grape content={''} />
+          <Grape content={state.content} />
         </div>
       </div>
     </Container>

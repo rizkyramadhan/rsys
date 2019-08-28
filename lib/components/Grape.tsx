@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import basic from './Grape/Blocks/Basic/index';
 
+import './Grape/Elements';
+
 export default ({
   id = 'grapesjs-react-editor',
   content = '',
@@ -15,7 +17,9 @@ export default ({
   const [editor, setEditor] = useState(null);
 
   useEffect(() => {
-    if (editor) editor.setComponents(content);
+    if (editor) {
+      editor.setComponents(content);
+    }
   }, [content]);
 
   useEffect(() => {
@@ -60,9 +64,11 @@ export default ({
       e.Panels.removeButton('options', 'export-template');
       e.Panels.removeButton('views', 'open-sm');
       e.Panels.removePanel('views-container');
+      e.setComponents(content);
     } else {
       if (document) {
         document.getElementById(id).append(editor.render());
+        editor.setComponents(content);
       }
     }
 

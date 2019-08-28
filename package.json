@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "cheerio": "^1.0.0-rc.3",
     "command-exists": "^1.2.8",
     "convict": "^5.1.0",
     "execa": "^2.0.4",

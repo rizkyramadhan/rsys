@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
 
+import $ from 'cheerio';
+
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
@@ -14,5 +16,10 @@ export default (req, res) => {
 };
 
 const convert = json => {
-  return json;
+  let jsx = ``;
+  let imprt = {};
+  $(json).each(item => {
+    console.log(item);
+  });
+  return ``;
 };

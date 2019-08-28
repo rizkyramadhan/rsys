@@ -82,11 +82,6 @@ export default forwardRef(
         e.setComponents(content);
         e.runCommand('open-blocks');
 
-        e.on('component:selected', m => {
-          e.runCommand('hide-blocks');
-          e.runCommand('open-tm');
-        });
-
         if (ref) {
           ref.current = editor;
         }

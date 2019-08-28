@@ -18,6 +18,6 @@ export default function(editor, opt: any = {}) {
       label: 'Layout',
       category: c.category,
       attributes: { class: 'fa fa-object-ungroup' },
-      content: `<layout-/>`
+      content: `<layout-ui/>`
     });
 }

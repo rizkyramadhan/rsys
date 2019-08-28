@@ -2,10 +2,7 @@ import grapesjs from 'grapesjs';
 
 export default grapesjs.plugins.add('gjs-blocks-basic', (editor, opts = {}) => {
   const config = {
-    blocks: [
-      'text',
-      'layout',
-    ],
+    blocks: ['text', 'layout'],
     flexGrid: 0,
     category: 'Basic',
     ...opts

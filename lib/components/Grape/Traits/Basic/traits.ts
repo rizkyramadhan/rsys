@@ -16,7 +16,8 @@ export default function(editor, opt: any = {}) {
               name: "href",
               label: "New href"
             }
-          ]
+          ],
+          droppable: false
         }
       }
     });

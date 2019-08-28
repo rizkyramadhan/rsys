@@ -1,23 +1,19 @@
-import { observable } from "mobx";
-import { observer } from "mobx-react-lite";
-import React from "react";
-import { defineElement } from "./util";
+import { observable } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import { defineElement } from './util';
 
-const name = "text";
-const state = observable({
-  attr: {} as any
-});
-const ReactEl = observer(() => {
+const name = 'text';
+const ReactEl = observer(({ state }: any) => {
   return (
     <>
       {!state.attr.title ? (
         <div
           style={{
-            color: "#9a9a9a",
-            padding: 5
+            color: '#9a9a9a'
           }}
         >
-          {"<empty>"}
+          {'<empty>'}
         </div>
       ) : (
         <div>{state.attr.title}</div>
@@ -26,4 +22,4 @@ const ReactEl = observer(() => {
   );
 });
 
-export default defineElement(name, state, ReactEl);
+export default defineElement(name, ReactEl);

@@ -16,10 +16,41 @@ export default (req, res) => {
 };
 
 const convert = json => {
-  let jsx = ``;
+  let jsx = walk(json);
   let imprt = {};
-  $(json).each(item => {
-    console.log(item);
-  });
-  return ``;
+
+  return `
+  ${jsx}
+  `;
 };
+
+const walk = (json, isRoot = true) => {
+  const result = [];
+  $(json).each((idx, item) => {
+    if (item.type === 'tag') {
+      const tag = cap(item.name.split('-')[0]);
+      const attribs = item.attribs;
+      console.log(attribs);
+      let single = `<${tag}`;
+
+      if (item.children.length > 0) {
+        single += `>` + walk(item.children, false) + `</${tag}>`;
+      } else {
+        single += `/>`;
+      }
+
+      result.push(single);
+    }
+  });
+
+  if (isRoot) {
+    if (result.length > 1) {
+      return `<>${result.join('\n')}</>`;
+    }
+  }
+
+  return result.join('\n');
+};
+
+const cap = (string: string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);

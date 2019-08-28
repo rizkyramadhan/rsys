@@ -50,6 +50,11 @@ export default forwardRef(
           plugins: [basic, ...plugins]
         });
 
+        const wrapperStyle = e.getWrapper().view.$el[0].style;
+        wrapperStyle.display = 'flex';
+        wrapperStyle.alignItems = 'stretch';
+        wrapperStyle.flexDirection = 'column';
+
         const defaultType = e.DomComponents.getType('default');
         const defaultModel = defaultType.model;
         const defaultView = defaultType.view;
@@ -80,7 +85,6 @@ export default forwardRef(
         e.Panels.removeButton('views', 'open-sm');
         e.Panels.removePanel('views-container');
         e.setComponents(content);
-        e.runCommand('open-blocks');
 
         if (ref) {
           ref.current = editor;

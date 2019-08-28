@@ -61,6 +61,7 @@ export default forwardRef(
         });
         setEditor(e);
         setupEditor(e);
+<<<<<<< Updated upstream
         e.Panels.removeButton('options', 'export-template');
         e.Panels.removeButton('views', 'open-sm');
         e.Panels.removePanel('views-container');
@@ -68,6 +69,15 @@ export default forwardRef(
 
         const openTmRun = e.Commands.get('open-tm').run;
         e.Commands.extend('open-tm', {
+=======
+        e.Panels.removeButton("options", "export-template");
+        e.Panels.removeButton("views", "open-sm");
+        e.Panels.removePanel("views-container");
+        e.runCommand("open-blocks");
+
+        const openTmRun = e.Commands.get("open-tm").run;
+        e.Commands.extend("open-tm", {
+>>>>>>> Stashed changes
           run: function(editor, sender) {
             openTmRun.bind(this)(editor, sender);
             const tmv = this.$cn2[0];

@@ -15,7 +15,7 @@ Starting
 `);
 
 const config = require('./config');
-console.log("Configuration loaded");
+console.log('Configuration loaded');
 
 fs.access(__dirname, fs.constants.W_OK, function(err) {
   if (err) {
@@ -29,6 +29,8 @@ app.prepare().then(() => {
     handle(req, res, parse(req.url, true).pathname)
   ).listen(config.get('port'), err => {
     if (err) throw err;
-    console.log(`> Ready on http://localhost:${config.get('port')}`);
+    console.log(
+      `> Ready on http://${config.get('host')}:${config.get('port')}`
+    );
   });
 });

@@ -1,10 +1,10 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ "./components/Grape.tsx":
-/*!******************************!*\
-  !*** ./components/Grape.tsx ***!
-  \******************************/
+/***/ "./lib/components/Grape.tsx":
+/*!**********************************!*\
+  !*** ./lib/components/Grape.tsx ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/head */ "next/head");
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Grape_Blocks_Basic_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Grape/Blocks/Basic/index */ "./components/Grape/Blocks/Basic/index.ts");
+/* harmony import */ var _Grape_Blocks_Basic_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Grape/Blocks/Basic/index */ "./lib/components/Grape/Blocks/Basic/index.ts");
 
 
 
@@ -104,10 +104,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 /***/ }),
 
-/***/ "./components/Grape/Blocks/Basic/blocks.ts":
-/*!*************************************************!*\
-  !*** ./components/Grape/Blocks/Basic/blocks.ts ***!
-  \*************************************************/
+/***/ "./lib/components/Grape/Blocks/Basic/blocks.ts":
+/*!*****************************************************!*\
+  !*** ./lib/components/Grape/Blocks/Basic/blocks.ts ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -375,10 +375,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./components/Grape/Blocks/Basic/index.ts":
-/*!************************************************!*\
-  !*** ./components/Grape/Blocks/Basic/index.ts ***!
-  \************************************************/
+/***/ "./lib/components/Grape/Blocks/Basic/index.ts":
+/*!****************************************************!*\
+  !*** ./lib/components/Grape/Blocks/Basic/index.ts ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -408,7 +408,7 @@ __webpack_require__.r(__webpack_exports__);
   }, opts); // Add blocks
 
 
-  const loadBlocks = __webpack_require__(/*! ./blocks */ "./components/Grape/Blocks/Basic/blocks.ts");
+  const loadBlocks = __webpack_require__(/*! ./blocks */ "./lib/components/Grape/Blocks/Basic/blocks.ts");
 
   loadBlocks.default(editor, config);
 }));
@@ -437,17 +437,6 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/assign */ "co
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/define-property */ "core-js/library/fn/object/define-property");
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js":
 /*!*******************************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js ***!
@@ -467,47 +456,6 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core-js/library/fn/object/keys");
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
-/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
-/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
 
 /***/ }),
 

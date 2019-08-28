@@ -1,5 +1,6 @@
 const convict = require('convict');
 const fs = require('fs');
+
 const config = convict({
   env: {
     doc: 'The application environment.',
@@ -7,8 +8,8 @@ const config = convict({
     default: 'development',
     env: 'NODE_ENV'
   },
-  ip: {
-    doc: 'The IP address to bind.',
+  host: {
+    doc: 'The Host IP address to bind.',
     format: 'ipaddress',
     default: '127.0.0.1',
     env: 'IP_ADDRESS'

@@ -16,7 +16,10 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "command-exists": "^1.2.8",
     "convict": "^5.1.0",
+    "execa": "^2.0.4",
+    "fs-extra": "^8.1.0",
     "grapesjs": "^0.15.3",
     "grapesjs-blocks-basic": "^0.1.8",
     "isomorphic-unfetch": "^3.0.0",

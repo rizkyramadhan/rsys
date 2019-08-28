@@ -12,11 +12,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/editor/pages": [
+    "/editor/api": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/next/dist/pages/_error": [
+    "/editor/pages": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

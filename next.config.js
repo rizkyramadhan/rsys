@@ -12,7 +12,13 @@ module.exports = withCSS(
       url: false
     },
     webpack(config, options) {
-      config.resolve.alias['@components'] = path.join(__dirname, 'components');
+      if (!options.isServer) {
+        config.node = {
+          fs: 'empty',
+          convict: 'empty'
+        };
+      }
+      config.resolve.alias['@lib'] = path.join(__dirname, 'lib');
       return config;
     }
   })

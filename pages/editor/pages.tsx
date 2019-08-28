@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 import React, { useEffect } from 'react';
-import Container from '@components/Container';
+import Container from '@lib/components/Container';
 import dynamic from 'next/dynamic';
 import { observer, useObservable } from 'mobx-react-lite';
-const Grape = dynamic(import('@components/Grape'), {
+const Grape = dynamic(import('@lib/components/Grape'), {
   ssr: false
 });
 const Page = (_props: any) => {

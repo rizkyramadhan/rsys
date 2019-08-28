@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import React, { useEffect } from 'react';
-import Container from '@components/Container';
+import Container from '@lib/components/Container';
 
 const Page = (_props: any) => {
   useEffect(() => {}, []);

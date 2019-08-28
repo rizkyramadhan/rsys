@@ -20,11 +20,18 @@ const Page = (props: any) => {
   useEffect(() => {
     if (props.ready) {
       Router.replace('/editor/pages');
+    } else {
+      const fetch = async () => {
+        const res = await api.get('file/isready');
+        if (res.ready) {
+          Router.replace('/editor/pages');
+        }
+      };
+      fetch();
     }
   }, []);
 
   if (props.ready) return null;
-
   return (
     <div
       style={{
@@ -87,8 +94,8 @@ Page.getInitialProps = async ({ req }: any) => {
   if (req) {
     const apiserver = require('@lib/apiserver');
     if (apiserver && apiserver.get) {
-      const res = await apiserver.get('files/isready');
-      return { ready: res.ready, path: process.cwd() };
+      const res = await apiserver.get('file/isready');
+      return { ready: res.ready };
     }
   }
   return {};

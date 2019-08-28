@@ -29,15 +29,18 @@ const walk = (json, isRoot = true) => {
   $(json).each((idx, item) => {
     if (item.type === 'tag') {
       const tag = cap(item.name.split('-')[0]);
-      const attribs = item.attribs;
-      console.log(attribs);
-      let single = `<${tag}`;
+      const atkeys = Object.keys(item.attribs || {});
+      let single = `<${tag} ${atkeys.length > 0 &&
+        atkeys.map(key => {
+          return `${key}={${JSON.stringify(item.attribs[key])}}`;
+        })}`; 
 
       if (item.children.length > 0) {
         single += `>` + walk(item.children, false) + `</${tag}>`;
       } else {
         single += `/>`;
       }
+
       result.push(single);
     }
   });

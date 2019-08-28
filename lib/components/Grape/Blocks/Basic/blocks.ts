@@ -21,9 +21,7 @@ export default function(editor, opt: any = {}) {
       label: "Layout",
       category: c.category,
       attributes: { class: "fa fa-object-ungroup" },
-      content: {
-        content: `<layout-ui/>`,
-        type: `layout-ui`
-      }
+      content: `<layout-ui/>`,
+      type: `layout-ui`
     });
 }

@@ -36,7 +36,7 @@ export default function(editor, opt: any = {}) {
           {
             type: "button",
             // ...
-            text: "Click me",
+            text: "Test",
             full: true, // Full width button
             command: e => {
               alert("Open console to view a result.");

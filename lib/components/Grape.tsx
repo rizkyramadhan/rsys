@@ -2,6 +2,7 @@ import GrapesJS from "grapesjs";
 import Head from "next/head";
 import { useEffect, useState, forwardRef } from "react";
 import basicBlocks from "./Grape/Blocks/Basic/index";
+import dataBlocks from "./Grape/Blocks/Data/index";
 import basicComponents from "./Grape/Components/index";
 
 import "./Grape/Elements";
@@ -48,7 +49,7 @@ export default forwardRef(
               }
             }
           },
-          plugins: [basicBlocks, basicComponents, ...plugins]
+          plugins: [basicBlocks, dataBlocks, basicComponents, ...plugins]
         });
 
         const wrapperStyle = e.getWrapper().view.$el[0].style;

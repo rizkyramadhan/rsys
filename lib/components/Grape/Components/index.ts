@@ -8,7 +8,12 @@ export default grapesjs.plugins.add(
       styleManager: styleManager,
       ...opts
     };
-    const components = [require("./ui-text"), require("./ui-layout")];
+    
+    const components = [
+      require("./ui-text"),
+      require("./ui-layout"),
+      require("./ui-select")
+    ];
 
     // DOM Components
     components.forEach((ui: any) => {

@@ -64,13 +64,6 @@ export default function(editor, opt: any = {}) {
     }
   });
 
-  // Default Style
-  c.styleTraits.forEach(trait => {
-    dt.addType(trait.type, {
-      ...c.styleManager[trait.type]
-    });
-  });
-
   dt.addType("textSize", {
     noLabel: true,
     templateInput: "",

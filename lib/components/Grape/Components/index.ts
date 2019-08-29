@@ -12,8 +12,8 @@ export default grapesjs.plugins.add(
     const components = [
       require("./ui-text"),
       require("./ui-layout"),
-      require("./ui-button")
-      // require("./ui-select")
+      require("./ui-button"),
+      require("./ui-select")
     ];
 
     // DOM Components
@@ -28,6 +28,13 @@ export default grapesjs.plugins.add(
         return `<div class="gjs-traits-label" style="margin: 0 -10px; background: #313742; letter-spacing: 1px;font-family: Helvetica,sans-serif;
         font-size: .75rem;">${trait.attributes.label}</div>`;
       }
+    });
+
+    // Default Style
+    styleTraits.forEach(trait => {
+      editor.TraitManager.addType(trait.type, {
+        ...styleManager[trait.type]
+      });
     });
   }
 );

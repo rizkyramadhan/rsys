@@ -69,10 +69,4 @@ export default function(editor, opt: any = {}) {
       }
     }
   });
-
-  c.styleTraits.forEach(trait => {
-    dt.addType(trait.type, {
-      createInput: c.styleManager[trait.type]
-    });
-  });
 }

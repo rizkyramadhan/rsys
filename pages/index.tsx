@@ -1,37 +1,33 @@
-import Router, { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import {
-  Label,
-  TextField,
-  PrimaryButton,
-  ProgressIndicator,
-  loadTheme
-} from 'office-ui-fabric-react';
-import { observer, useObservable } from 'mobx-react-lite';
 import api from '@lib/api';
 import theme from '@lib/theme';
+import { observer, useObservable } from 'mobx-react-lite';
+import Router, { useRouter } from 'next/router';
+import {
+  Label,
+  PrimaryButton,
+  ProgressIndicator,
+  TextField
+} from 'office-ui-fabric-react';
+import React, { useEffect } from 'react';
 
 const Page = (props: any) => {
   const router = useRouter();
   const state = useObservable({
     name: '',
-    loading: false
+    loading: false,
+    ready: null
   });
   useEffect(() => {
-    if (props.ready) {
-      Router.replace('/editor/pages');
-    } else {
-      const fetch = async () => {
-        const res = await api.get('file/isready');
-        if (res.ready) {
-          Router.replace('/editor/pages');
-        }
-      };
-      fetch();
-    }
+    const fetch = async () => {
+      const res = await api.get('file/isready');
+      if (res.ready) {
+        Router.replace('/editor/pages');
+      }
+    };
+    fetch();
   }, []);
 
-  if (props.ready) return null;
+  if (state.ready || state.ready === null) return null;
   return (
     <div
       style={{
@@ -88,17 +84,6 @@ const Page = (props: any) => {
       )}
     </div>
   );
-};
-
-Page.getInitialProps = async ({ req }: any) => {
-  if (req) {
-    const apiserver = require('@lib/apiserver');
-    if (apiserver && apiserver.get) {
-      const res = await apiserver.get('file/isready');
-      return { ready: res.ready };
-    }
-  }
-  return {};
 };
 
 export default observer(Page);

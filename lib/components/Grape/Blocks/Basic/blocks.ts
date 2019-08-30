@@ -9,7 +9,7 @@ export default function(editor, opt: any = {}) {
     bm.add("text", {
       label: "Text",
       category: c.category,
-      attributes: { class: "fa fa-text-height" },
+      attributes: { class: "fa fa-font" },
       content: { type: "text-ui", tagName: `text-ui` }
     });
 
@@ -19,5 +19,21 @@ export default function(editor, opt: any = {}) {
       category: c.category,
       attributes: { class: "fa fa-object-ungroup" },
       content: { type: "layout-ui", tagName: `layout-ui` }
+    });
+
+  toAdd("button") &&
+    bm.add("button", {
+      label: "Button",
+      category: c.category,
+      attributes: { class: "fa fa-square" },
+      content: { type: "button-ui", tagName: `button-ui` }
+    });
+
+  toAdd("input") &&
+    bm.add("input", {
+      label: "Input",
+      category: c.category,
+      attributes: { class: "fa fa-edit" },
+      content: { type: "input-ui", tagName: `input-ui` }
     });
 }

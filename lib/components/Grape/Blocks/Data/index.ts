@@ -1,10 +1,10 @@
 import grapesjs from "grapesjs";
 
-export default grapesjs.plugins.add("gjs-blocks-basic", (editor, opts = {}) => {
+export default grapesjs.plugins.add("gjs-blocks-data", (editor, opts = {}) => {
   const config = {
-    blocks: ["text", "layout", "button", "input"],
+    blocks: ["select", "query", "save"],
     flexGrid: 0,
-    category: "Basic",
+    category: "Data",
     ...opts
   };
 

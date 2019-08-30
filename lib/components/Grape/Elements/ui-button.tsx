@@ -1,10 +1,8 @@
-import { observable } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { defineElement } from "./util";
 
-const name = "layout";
-const slot = { __html: "<slot/>" };
+const name = "button";
 const ReactEl = observer(({ state }: any) => {
   const customStyle = {
     marginTop: state.attr.layoutmargintop,
@@ -19,16 +17,43 @@ const ReactEl = observer(({ state }: any) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "stretch",
-        minHeight: 30,
-        padding: 10,
+        ...defaultStyle,
         ...customStyle
       }}
-      dangerouslySetInnerHTML={slot}
-    />
+    >
+      <div
+        style={{
+          ...defaultLabel
+        }}
+      >
+        {state.attr.label || "<empty>"}
+      </div>
+    </div>
   );
 });
 
 export default defineElement(name, ReactEl);
+
+const defaultStyle = {
+  backgroundColor: "rgb(51, 102, 255)",
+  borderColor: "rgb(51, 102, 255)",
+  borderRadius: "4px",
+  borderWidth: "2px",
+  minHeight: "40px",
+  minWidth: "40px",
+  padding: "12px 10px",
+  opacity: 1,
+  transitionDuration: "0.25s",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
+};
+
+const defaultLabel = {
+  color: "rgb(255, 255, 255)",
+  fontSize: "14px",
+  fontWeight: 600,
+  lineHeight: "16px",
+  marginRight: "10px",
+  marginLeft: "10px"
+};

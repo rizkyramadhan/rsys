@@ -13,7 +13,8 @@ export default grapesjs.plugins.add(
       require("./ui-text"),
       require("./ui-layout"),
       require("./ui-button"),
-      require("./ui-select")
+      require("./ui-select"),
+      require("./ui-query")
     ];
 
     // DOM Components

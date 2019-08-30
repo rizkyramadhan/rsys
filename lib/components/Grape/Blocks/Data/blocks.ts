@@ -18,7 +18,7 @@ export default function(editor, opt: any = {}) {
       label: "Query",
       category: c.category,
       attributes: { class: "fa fa-code" },
-      content: { type: "query-ui", tagName: "div" }
+      content: { type: "query-ui", tagName: "query-ui" }
     });
 
   toAdd("save") &&

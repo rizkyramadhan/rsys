@@ -9,7 +9,7 @@ export default function(editor, opt: any = {}) {
     return db;
   });
 
-  dc.addType("select-ui", {
+  dc.addType("query-ui", {
     model: {
       defaults: {
         traits: [
@@ -25,13 +25,14 @@ export default function(editor, opt: any = {}) {
           },
           {
             type: "text",
-            name: "columns",
-            label: "Column"
+            name: "sql",
+            label: "Sql"
           },
           {
             type: "text",
-            name: "table",
-            label: "Table"
+            name: "params",
+            label: "Params",
+            placeholder: "sparator with coma (ex: 1,2,3)"
           },
           {
             type: "button",
@@ -46,7 +47,7 @@ export default function(editor, opt: any = {}) {
               const data = {};
               Object.keys(attr).forEach(k => {
                 switch (k) {
-                  case "columns":
+                  case "params":
                     data[k] = attr[k].split(",");
                     break;
                   default:
@@ -56,7 +57,7 @@ export default function(editor, opt: any = {}) {
               });
 
               axios
-                .post("/api/db/select", data)
+                .post("/api/db/query", data)
                 .then(function(response) {
                   console.log(response.data.result);
                 })

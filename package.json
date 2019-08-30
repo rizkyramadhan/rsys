@@ -15,6 +15,7 @@
     "mssql": false
   },
   "dependencies": {
+    "@types/lodash": "^4.14.138",
     "@zeit/next-css": "^1.0.1",
     "cheerio": "^1.0.0-rc.3",
     "command-exists": "^1.2.8",
@@ -26,6 +27,7 @@
     "grapesjs-blocks-basic": "^0.1.8",
     "isomorphic-unfetch": "^3.0.0",
     "knex": "^0.19.2",
+    "lodash": "^4.17.15",
     "mobx": "^5.13.0",
     "mobx-react-lite": "^1.4.1",
     "mssql": "^5.1.0",
@@ -38,6 +40,8 @@
     "pg": "^7.12.1",
     "prettier": "1.18.2",
     "react": "^16.9.0",
+    "react-dnd-cjs": "^9.3.9",
+    "react-dnd-html5-backend-cjs": "^9.3.9",
     "react-dom": "^16.9.0",
     "sqlite3": "^4.1.0",
     "ts-morph": "^3.1.3"

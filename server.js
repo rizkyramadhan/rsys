@@ -7,6 +7,7 @@ const dev = !!process.env.npm_package_scripts_dev;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+
 console.log(`
 Starting
 ╦═╗╔═╗╦ ╦╔═╗

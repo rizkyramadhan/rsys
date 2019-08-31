@@ -76,6 +76,19 @@ export default forwardRef(
               tmv.removeChild(tmv.childNodes[0]);
           }
         });
+
+        e.on('component:selected', () => {
+          const pn = e.Panels;
+          const openSmBtn = pn.getButton('views', 'open-tm');
+          const openLayersBtn = pn.getButton('views', 'open-layers');
+      
+          // Don't switch when the Layer Manager is on or
+          // there is no selected component
+          if ((!openLayersBtn || !openLayersBtn.get('active')) && e.getSelected()) {
+            openSmBtn && openSmBtn.set('active', 1);
+          }
+        });
+
         e.setComponents(content);
         (window as any).ed = e;
 

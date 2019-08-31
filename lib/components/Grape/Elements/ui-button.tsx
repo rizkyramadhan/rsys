@@ -20,7 +20,7 @@ const ReactEl = observer(({ state }: any) => {
         style={{
           ...defaultLabel,
           ...fontStyle,
-          color: mode.text[state.attr.buttonmode],
+          color: state.attr.buttonmode == "basic" ? "#313742" : "#F7F9FC",
           ...size[state.attr.buttonsize]
         }}
       >

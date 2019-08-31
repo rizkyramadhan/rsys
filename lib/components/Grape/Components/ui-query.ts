@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from '@lib/api';
 
 export default function(editor, opt: any = {}) {
   const c = opt;
@@ -56,7 +56,7 @@ export default function(editor, opt: any = {}) {
                 }
               });
 
-              axios
+              api
                 .post("/api/db/query", data)
                 .then(function(response) {
                   console.log(response.data.result);

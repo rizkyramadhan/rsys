@@ -34,7 +34,7 @@ const ReactEl = observer(({ state }: any) => {
           style={{
             ...fontStyle,
             ...customTextStyle,
-            ...mode.text[state.attr.textmode]
+            color: mode.text[state.attr.textmode]
           }}
         >
           {state.attr.text}

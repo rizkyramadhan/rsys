@@ -6,6 +6,7 @@ export default function(editor, opt: any = {}) {
   dc.addType("text-ui", {
     model: {
       defaults: {
+        dropable: false,
         traits: [
           {
             label: "Attributes",
@@ -15,6 +16,20 @@ export default function(editor, opt: any = {}) {
             label: "Text",
             name: "text",
             placeholder: "<empty>"
+          },
+          {
+            type: "select",
+            label: "Mode",
+            name: "textmode",
+            options: [
+              { id: "none", name: "None" },
+              { id: "primary", name: "Primary" },
+              { id: "success", name: "Success" },
+              { id: "info", name: "Info" },
+              { id: "warning", name: "Warning" },
+              { id: "danger", name: "Danger" }
+            ],
+            value: ""
           },
           {
             label: "Typogrhapy",
@@ -41,7 +56,7 @@ export default function(editor, opt: any = {}) {
             type: "color",
             label: "Color",
             name: "textcolor",
-            value: "#000000"
+            value: "#313742"
           },
           {
             label: "Align",
@@ -69,17 +84,13 @@ export default function(editor, opt: any = {}) {
     templateInput: "",
     createInput: ({ trait, component }) => {
       const el = document.createElement("div");
-      const textSize = "18px";
-      component.addAttributes({
-        textSize
-      });
       el.innerHTML = `
       <div style="display: flex; flex-direction: column; border-top: 1px solid #313742; padding-top: 10px">
         <div style="display: flex; flex-direction: row; margin-bottom: 10px;">
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 0; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Size">Size</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-size" type="text" placeholder="" value="${textSize}"></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-size" type="text" placeholder=""></div>
             </div>
           </div>
           <div style="display: flex; flex-direction: row; align-items: center;">
@@ -113,7 +124,7 @@ export default function(editor, opt: any = {}) {
       
     <div class="gjs-field-radio"><div class="gjs-radio-items">
           <div class="gjs-radio-item">
-            <input type="radio" class="gjs-sm-radio inp-text-align" id="text-align-start" name="text-align" value="left">
+            <input type="radio" class="gjs-sm-radio inp-text-align" id="text-align-start" name="text-align" value="left" checked>
             <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Left" for="text-align-start">
             <svg data-icon="text-align-left" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path fill-rule="evenodd" clip-rule="evenodd" d="M14 2H2v2h12V2zm-4 3H2v2h8V5zm-8 6h8v2H2v-2zm12-3H2v2h12V8z" fill="currentColor"></path></svg>
             </label>
@@ -165,7 +176,7 @@ export default function(editor, opt: any = {}) {
           <div class="gjs-field-radio">
             <div class="gjs-radio-items">
               <div class="gjs-radio-item" style="justify-content: center;align-items: center;display: flex;">
-                <input type="radio" class="gjs-sm-radio inp-text-style" id="text-style-normal" name="text-style" value="normal">
+                <input type="radio" class="gjs-sm-radio inp-text-style" id="text-style-normal" name="text-style" value="normal" checked>
                 <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Visible" for="text-style-normal" style="width: 100%;">
                 <svg data-icon="font-style-none" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 3h2v2H9v6h2v2H5v-2h2V5H5V3h4z" fill="currentColor"></path></svg>
                 </label>
@@ -183,7 +194,7 @@ export default function(editor, opt: any = {}) {
           <div class="gjs-field-radio">
             <div class="gjs-radio-items">
               <div class="gjs-radio-item"  style="justify-content: center;align-items: center;display: flex;">
-                <input type="radio" class="gjs-sm-radio inp-text-decoration" id="text-decoration-none" name="text-decoration" value="none">
+                <input type="radio" class="gjs-sm-radio inp-text-decoration" id="text-decoration-none" name="text-decoration" value="none" checked>
                 <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Scroll" for="text-decoration-none" style="width: 100%;">
                 <svg data-icon="cross" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.414 8l3.293-3.293-1.414-1.414L8 6.586 4.707 3.293 3.293 4.707 6.586 8l-3.293 3.293 1.414 1.414L8 9.414l3.293 3.293 1.414-1.414L9.414 8z" fill="currentColor"></path></svg>
                 </label>
@@ -215,9 +226,8 @@ export default function(editor, opt: any = {}) {
     },
     onEvent({ elInput, component, event }) {
       const textstyle = elInput.querySelector(".inp-text-style:checked").value;
-      const textdecoration = elInput.querySelector(
-        ".inp-text-decoration:checked"
-      ).value;
+      const textdecoration =
+        elInput.querySelector(".inp-text-decoration:checked").value || "";
       component.addAttributes({ textstyle, textdecoration });
     }
   });

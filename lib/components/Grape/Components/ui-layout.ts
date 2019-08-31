@@ -5,7 +5,14 @@ export default function(editor, opt: any = {}) {
   dc.addType("layout-ui", {
     model: {
       defaults: {
-        traits: [...c.styleTraits]
+        traits: [
+          {
+            type: "color",
+            label: "Background",
+            name: "layoutbackground"
+          },
+          ...c.styleTraits
+        ]
       }
     }
   });

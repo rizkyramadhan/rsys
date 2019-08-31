@@ -1,24 +1,19 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { defineElement } from "./util";
+import { fontStyle, mode } from ".";
 
 const name = "text";
 const ReactEl = observer(({ state }: any) => {
   const customStyle = {
-    color: state.attr.color || "#313742",
-    fontWeight: state.attr.weight,
+    ...JSON.parse(state.attr.layoutstyle || "{}")
+  };
+  const customTextStyle = {
+    color: state.attr.textcolor,
+    fontWeight: state.attr.textweight,
     fontSize: state.attr.textsize,
     lineHeight: state.attr.textheight,
-    textAlign: state.attr.textalign,
-
-    marginTop: state.attr.layoutmargintop,
-    marginBottom: state.attr.layoutmarginbottom,
-    marginLeft: state.attr.layoutmarginleft,
-    marginRight: state.attr.layoutmarginright,
-    paddingTop: state.attr.layoutpaddingtop,
-    paddingBottom: state.attr.layoutpaddingbottom,
-    paddingLeft: state.attr.layoutpaddingleft,
-    paddingRight: state.attr.layoutpaddingright
+    textAlign: state.attr.textalign
   };
 
   return (
@@ -26,7 +21,8 @@ const ReactEl = observer(({ state }: any) => {
       {!state.attr.text ? (
         <div
           style={{
-            ...defaultStyle,
+            margin: "5px",
+            ...fontStyle,
             ...customStyle,
             color: "#9a9a9a"
           }}
@@ -36,8 +32,9 @@ const ReactEl = observer(({ state }: any) => {
       ) : (
         <div
           style={{
-            ...defaultStyle,
-            ...customStyle
+            ...fontStyle,
+            ...customTextStyle,
+            ...mode.text[state.attr.textmode]
           }}
         >
           {state.attr.text}
@@ -48,7 +45,3 @@ const ReactEl = observer(({ state }: any) => {
 });
 
 export default defineElement(name, ReactEl);
-
-const defaultStyle = {
-  fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif`
-};

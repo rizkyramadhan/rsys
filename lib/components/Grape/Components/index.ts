@@ -14,7 +14,8 @@ export default grapesjs.plugins.add(
       require("./ui-layout"),
       require("./ui-button"),
       require("./ui-select"),
-      require("./ui-query")
+      require("./ui-query"),
+      require("./ui-input")
     ];
 
     // DOM Components
@@ -521,49 +522,49 @@ const styleManager = {
         {
           el: ".margin-top",
           value: ".margin-top-value",
-          attr: "layoutmargintop",
+          attr: "marginTop",
           type: "yt"
         },
         {
           el: ".margin-bottom",
           value: ".margin-bottom-value",
-          attr: "layoutmarginbottom",
+          attr: "marginBottom",
           type: "yb"
         },
         {
           el: ".margin-left",
           value: ".margin-left-value",
-          attr: "layoutmarginleft",
+          attr: "marginLeft",
           type: "xl"
         },
         {
           el: ".margin-right",
           value: ".margin-right-value",
-          attr: "layoutmarginright",
+          attr: "marginRight",
           type: "xr"
         },
         {
           el: ".padding-top",
           value: ".padding-top-value",
-          attr: "layoutpaddingtop",
+          attr: "paddingTop",
           type: "yt"
         },
         {
           el: ".padding-bottom",
           value: ".padding-bottom-value",
-          attr: "layoutpaddingbottom",
+          attr: "paddingBottom",
           type: "yb"
         },
         {
           el: ".padding-left",
           value: ".padding-left-value",
-          attr: "layoutpaddingleft",
+          attr: "paddingLeft",
           type: "xl"
         },
         {
           el: ".padding-right",
           value: ".padding-right-value",
-          attr: "layoutpaddingright",
+          attr: "paddingRight",
           type: "xr"
         }
       ];
@@ -571,6 +572,8 @@ const styleManager = {
       selector.forEach(elem => {
         let value = elInput.querySelector(elem.value).textContent;
         elInput.querySelector(elem.el).onmousedown = e => {
+          let layoutStyle = component.getAttributes().layoutStyle || "{}";
+          layoutStyle = JSON.parse(layoutStyle);
           e.preventDefault();
           let initX = e.clientX;
           let initY = e.clientY;
@@ -593,8 +596,9 @@ const styleManager = {
               v = valX * -1;
             }
             elInput.querySelector(elem.value).innerHTML = parseInt(value) + v;
+            layoutStyle[elem.attr] = parseInt(value) + v + "px";
             component.addAttributes({
-              [elem.attr]: parseInt(value) + v + "px"
+              layoutStyle: JSON.stringify(layoutStyle)
             });
           };
         };
@@ -604,7 +608,8 @@ const styleManager = {
   layoutSize: {
     noLabel: true,
     templateInput: "",
-    createInput: ({ trait }) => {
+    createInput: ({ trait, component }) => {
+      const defaultVal = trait.attributes.value;
       const el = document.createElement("div");
       el.innerHTML = `
       <div style="display: flex; flex-direction: column;">
@@ -612,13 +617,17 @@ const styleManager = {
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 0; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Width">Width</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-width" type="text" placeholder=""></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-width" type="text" placeholder="" value="${defaultVal[
+                "width"
+              ] || ""}"></div>
             </div>
           </div>
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 10px; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Height">Height</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-height" type="text" placeholder=""></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-height" type="text" placeholder="" value="${defaultVal[
+                "height"
+              ] || ""}"></div>
             </div>
           </div>
         </div>
@@ -626,13 +635,17 @@ const styleManager = {
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 0; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Min W">Min W</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-min-width" type="text" placeholder=""></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-minWidth" type="text" placeholder="" value="${defaultVal[
+                "minWidth"
+              ] || ""}"></div>
             </div>
           </div>
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 10px; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Min H">Min H</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-min-height" type="text" placeholder=""></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-minHeight" type="text" placeholder=""  value="${defaultVal[
+                "minHeight"
+              ] || ""}"></div>
             </div>
           </div>
         </div>
@@ -640,13 +653,17 @@ const styleManager = {
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 0; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Max W">Max W</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-max-width" type="text" placeholder=""></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-maxWidth" type="text" placeholder="" value="${defaultVal[
+                "maxWidth"
+              ] || ""}"></div>
             </div>
           </div>
           <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="gjs-label-wrp" style="padding: 0 5px 0 10px; white-space: nowrap; min-width: 35%;"><div class="gjs-label" title="Max W">Max W</div></div>
             <div class="gjs-field-wrp gjs-field-wrp--text" data-input="">
-              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-max-height" type="text" placeholder=""></div>
+              <div class="gjs-field gjs-field-text" data-input=""><input class="inp-layout-maxHeight" type="text" placeholder="" value="${defaultVal[
+                "maxHeight"
+              ] || ""}"></div>
             </div>
           </div>
         </div>
@@ -655,23 +672,24 @@ const styleManager = {
       return el;
     },
     onEvent({ elInput, component, event }) {
-      const layoutwidth = elInput.querySelector(".inp-layout-width").value;
-      const layoutminWidth = elInput.querySelector(".inp-layout-min-width")
-        .value;
-      const layoutmaxWidth = elInput.querySelector(".inp-layout-max-width")
-        .value;
-      const layoutheight = elInput.querySelector(".inp-layout-height").value;
-      const layoutminHeight = elInput.querySelector(".inp-layout-min-height")
-        .value;
-      const layoutmaxHeight = elInput.querySelector(".inp-layout-max-height")
-        .value;
+      let layoutStyle = component.getAttributes().layoutStyle || "{}";
+      layoutStyle = JSON.parse(layoutStyle);
+      layoutStyle["width"] = elInput.querySelector(".inp-layout-width").value;
+      layoutStyle["minWidth"] = elInput.querySelector(
+        ".inp-layout-minWidth"
+      ).value;
+      layoutStyle["maxWidth"] = elInput.querySelector(
+        ".inp-layout-maxWidth"
+      ).value;
+      layoutStyle["height"] = elInput.querySelector(".inp-layout-height").value;
+      layoutStyle["minHeight"] = elInput.querySelector(
+        ".inp-layout-minHeight"
+      ).value;
+      layoutStyle["maxHeight"] = elInput.querySelector(
+        ".inp-layout-maxHeight"
+      ).value;
       component.addAttributes({
-        layoutwidth,
-        layoutminWidth,
-        layoutmaxWidth,
-        layoutheight,
-        layoutminHeight,
-        layoutmaxHeight
+        layoutStyle: JSON.stringify(layoutStyle)
       });
     }
   },
@@ -713,10 +731,14 @@ const styleManager = {
       return el;
     },
     onEvent({ elInput, component, event }) {
-      const layoutoverflow = elInput.querySelector(
+      let layoutStyle = component.getAttributes().layoutStyle || "{}";
+      layoutStyle = JSON.parse(layoutStyle);
+      layoutStyle["overflow"] = elInput.querySelector(
         ".inp-layout-overflow:checked"
       ).value;
-      component.addAttributes({ layoutoverflow });
+      component.addAttributes({
+        layoutStyle: JSON.stringify(layoutStyle)
+      });
     }
   },
   layoutDisplay: {
@@ -735,25 +757,25 @@ const styleManager = {
           </div>
           <div class="gjs-radio-item"  style="justify-content: center;align-items: center;display: flex;">
             <input type="radio" class="gjs-sm-radio inp-layout-display" id="display-flex" name="display" value="flex">
-            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Horizontal" for="display-flex" style="width: 100%;">
+            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Flex" for="display-flex" style="width: 100%;">
             <svg data-icon="display-flex" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path opacity=".6" fill-rule="evenodd" clip-rule="evenodd" d="M2 2h12v12H2V2zM1 1h14v14H1V1z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M7 4H4v8h3V4zm2 0h3v8H9V4z" fill="currentColor"></path></svg>
             </label>
           </div>
           <div class="gjs-radio-item"  style="justify-content: center;align-items: center;display: flex;">
             <input type="radio" class="gjs-sm-radio inp-layout-display" id="display-inline-block" name="display" value="inline-block">
-            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Horizontal" for="display-inline-block" style="width: 100%;">
+            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Inline Block" for="display-inline-block" style="width: 100%;">
             <svg data-icon="display-inline-block" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4h8v8H4V4zm6 2H6v4h4V6z" fill="currentColor"></path><path opacity=".6" fill-rule="evenodd" clip-rule="evenodd" d="M1 2h1v12H1V2zm14 0h-1v12h1V2z" fill="currentColor"></path></svg>
             </label>
           </div>
           <div class="gjs-radio-item"  style="justify-content: center;align-items: center;display: flex;">
             <input type="radio" class="gjs-sm-radio inp-layout-display" id="display-inline" name="display" value="inline">
-            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Horizontal" for="display-inline" style="width: 100%;">
+            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Inline" for="display-inline" style="width: 100%;">
             <svg data-icon="display-inline" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path opacity=".6" fill-rule="evenodd" clip-rule="evenodd" d="M1 2h1v12H1V2zm14 0h-1v12h1V2z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M7.25 3L3.5 13h2l1-3h3l1 3h2L8.75 3h-1.5zm1.917 6L8 5.5 6.833 9h2.334z" fill="currentColor"></path></svg>
             </label>
           </div>
           <div class="gjs-radio-item"  style="justify-content: center;align-items: center;display: flex;">
             <input type="radio" class="gjs-sm-radio inp-layout-display" id="display-none" name="display" value="none">
-            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="Horizontal" for="display-none" style="width: 100%;">
+            <label class="icons-flex icon-dir-row gjs-sm-icon gjs-radio-item-label" title="None" for="display-none" style="width: 100%;">
             <svg data-icon="eye-invisible" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" class="bem-Svg" style="transform: translate(0px, 0px);"><path opacity=".6" fill-rule="evenodd" clip-rule="evenodd" d="M9.842 3.33A5.537 5.537 0 0 0 8 3C4.134 3 1 7.5 1 8c0 .23.666 1.311 1.763 2.409l2.242-2.242a3 3 0 0 1 3.162-3.162l1.675-1.676zm-2.009 7.665a3 3 0 0 0 3.162-3.162l2.242-2.242C14.334 6.69 15 7.77 15 8c0 .5-3.134 5-7 5a5.538 5.538 0 0 1-1.842-.33l1.675-1.675z" fill="currentColor"></path><path d="M2 14L14 2" stroke="currentColor" stroke-width="1.5"></path></svg>
             </label>
           </div>
@@ -764,9 +786,14 @@ const styleManager = {
       return el;
     },
     onEvent({ elInput, component, event }) {
-      const layoutdisplay = elInput.querySelector(".inp-layout-display:checked")
-        .value;
-      component.addAttributes({ layoutdisplay });
+      let layoutStyle = component.getAttributes().layoutStyle || "{}";
+      layoutStyle = JSON.parse(layoutStyle);
+      layoutStyle["display"] = elInput.querySelector(
+        ".inp-layout-display:checked"
+      ).value;
+      component.addAttributes({
+        layoutStyle: JSON.stringify(layoutStyle)
+      });
     }
   },
   layoutDirection: {
@@ -805,10 +832,14 @@ const styleManager = {
       return el;
     },
     onEvent({ elInput, component, event }) {
-      const layoutdirection = elInput.querySelector(
+      let layoutStyle = component.getAttributes().layoutStyle || "{}";
+      layoutStyle = JSON.parse(layoutStyle);
+      layoutStyle["flexDirection"] = elInput.querySelector(
         ".inp-layout-direction:checked"
       ).value;
-      component.addAttributes({ layoutdirection });
+      component.addAttributes({
+        layoutStyle: JSON.stringify(layoutStyle)
+      });
     }
   },
   layoutAlign: {
@@ -858,9 +889,14 @@ const styleManager = {
       return el;
     },
     onEvent({ elInput, component, event }) {
-      const layoutalign = elInput.querySelector(".inp-layout-align:checked")
-        .value;
-      component.addAttributes({ layoutalign });
+      let layoutStyle = component.getAttributes().layoutStyle || "{}";
+      layoutStyle = JSON.parse(layoutStyle);
+      layoutStyle["alignItems"] = elInput.querySelector(
+        ".inp-layout-align:checked"
+      ).value;
+      component.addAttributes({
+        layoutStyle: JSON.stringify(layoutStyle)
+      });
     }
   },
   layoutJustify: {
@@ -910,9 +946,14 @@ const styleManager = {
       return el;
     },
     onEvent({ elInput, component, event }) {
-      const layoutjustify = elInput.querySelector(".inp-layout-justify:checked")
-        .value;
-      component.addAttributes({ layoutjustify });
+      let layoutStyle = component.getAttributes().layoutStyle || "{}";
+      layoutStyle = JSON.parse(layoutStyle);
+      layoutStyle["justifyContent"] = elInput.querySelector(
+        ".inp-layout-justify:checked"
+      ).value;
+      component.addAttributes({
+        layoutStyle: JSON.stringify(layoutStyle)
+      });
     }
   }
 };

@@ -32,7 +32,7 @@ export default function(editor, opt: any = {}) {
             value: ""
           },
           {
-            label: "Typogrhapy",
+            label: "Typography",
             type: "label"
           },
           {

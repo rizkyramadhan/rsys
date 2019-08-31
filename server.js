@@ -7,6 +7,14 @@ const dev = !!process.env.npm_package_scripts_dev;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const library = require('office-ui-fabric-react/lib-commonjs/Utilities');
+const responsiveLib = require('office-ui-fabric-react/lib-commonjs/utilities/decorators/withResponsiveMode');
+const icon = require('office-ui-fabric-react/lib/Icons');
+
+icon.initializeIcons();
+library.setSSR(true);
+library.setRTL(false);
+responsiveLib.setResponsiveMode(responsiveLib.ResponsiveMode.large);
 
 console.log(`
 Starting

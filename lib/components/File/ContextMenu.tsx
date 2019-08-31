@@ -1,5 +1,6 @@
 import { Callout, DirectionalHint, Nav } from 'office-ui-fabric-react';
 import React from 'react';
+import { lightTheme } from '@lib/theme';
 
 // create your menu first
 export default ({
@@ -11,8 +12,13 @@ export default ({
   parent
 }: any) => (
   <>
-    <Callout target={cref} directionalHint={DirectionalHint.rightCenter}>
+    <Callout
+      target={cref}
+      theme={lightTheme}
+      directionalHint={DirectionalHint.rightCenter}
+    >
       <Nav
+        theme={lightTheme}
         styles={{ root: { width: 300 } }}
         expandButtonAriaLabel='Expand or collapse'
         onLinkClick={e => {

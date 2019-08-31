@@ -30,10 +30,10 @@ export default observer(
     onContextMenu
   }: any) => {
     const ref = useRef<HTMLDivElement>(null);
-    const labelRef = useRef<HTMLDivElement>(null);
 
     const state = useObservable({
-      edit: !!file.isNew
+      edit: !!file.isNew,
+      rightClickEv: null as any
     });
     const namesplit = file.name.split('.');
     const ext = namesplit.pop();
@@ -102,7 +102,11 @@ export default observer(
           onContextMenu={e => {
             e.preventDefault();
             e.stopPropagation();
-            if (onContextMenu) {
+            state.rightClickEv = e.nativeEvent;
+
+            if (contextmenu) {
+              onContextMenu('');
+            } else if (onContextMenu) {
               onContextMenu(file);
             }
           }}
@@ -117,7 +121,7 @@ export default observer(
             alignItems: 'center',
             borderBottom: '1px solid #565B63',
             backgroundColor: state.edit
-              ? 'yellow'
+              ? '#858FB8'
               : isSelected
               ? '#818894'
               : '#373D49',
@@ -138,19 +142,19 @@ export default observer(
             {file.type === 'file' ? (
               <Icon
                 iconName='FileHTML'
-                style={{ color: 'purple' }}
+                style={{ color: 'white' }}
                 title='Component'
               />
             ) : file.expanded ? (
               <Icon
                 iconName='FolderOpen'
-                style={{ color: '#222' }}
+                style={{ color: 'white' }}
                 title='Folder Expanded'
               />
             ) : (
               <Icon
                 iconName='Folder'
-                style={{ color: '#222' }}
+                style={{ color: 'white' }}
                 title='Folder'
               />
             )}
@@ -158,6 +162,26 @@ export default observer(
           {state.edit ? (
             <TextField
               value={name}
+              styles={{
+                field: {
+                  border: 0,
+                  background: 'transparent',
+                  margin: 0,
+                  padding: 0
+                },
+                fieldGroup: {
+                  border: 0,
+                  background: 'transparent',
+                  margin: 0,
+                  padding: 0
+                },
+                wrapper: {
+                  border: 0,
+                  background: 'transparent',
+                  margin: 0,
+                  padding: 0
+                }
+              }}
               onKeyDown={(e: any) => {
                 if (e.keyCode === 27) {
                   state.edit = false;
@@ -192,7 +216,7 @@ export default observer(
             <Label>{name}</Label>
           )}
 
-          <div ref={labelRef} style={{ position: 'absolute', right: 0 }} />
+          <div style={{ position: 'absolute', right: 0 }} />
           {(contextmenu === file.relativePath || state.edit) && (
             <div
               onContextMenu={() => {
@@ -239,7 +263,7 @@ export default observer(
             <ContextMenu
               onContextMenu={onContextMenu}
               file={file}
-              cref={labelRef}
+              cref={state.rightClickEv}
               parent={parent}
               onDelete={() => {
                 parent.splice(index, 1);
@@ -305,7 +329,7 @@ const applyRename = (
         // Api.newDir(file.relativePath);
       }
     } else {
-    //   Api.move(dirPath + '/' + file.originalName, dirPath + '/' + file.name);
+      //   Api.move(dirPath + '/' + file.originalName, dirPath + '/' + file.name);
     }
     if (dirPath + '/' + file.originalName === selected) {
       onSelect(file);

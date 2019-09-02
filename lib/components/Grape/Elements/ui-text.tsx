@@ -9,11 +9,11 @@ const ReactEl = observer(({ state }: any) => {
     ...JSON.parse(state.attr.layoutstyle || "{}")
   };
   const customTextStyle = {
-    color: state.attr.textcolor,
-    fontWeight: state.attr.textweight,
-    fontSize: state.attr.textsize,
-    lineHeight: state.attr.textheight,
-    textAlign: state.attr.textalign
+    ...JSON.parse(state.attr.textstyle || "{}"),
+    ...(!!state.attr.textmode &&
+      state.attr.textmode != "none" && {
+        color: mode.text[state.attr.textmode]
+      })
   };
 
   return (
@@ -33,8 +33,7 @@ const ReactEl = observer(({ state }: any) => {
         <div
           style={{
             ...fontStyle,
-            ...customTextStyle,
-            color: mode.text[state.attr.textmode]
+            ...customTextStyle
           }}
         >
           {state.attr.text}

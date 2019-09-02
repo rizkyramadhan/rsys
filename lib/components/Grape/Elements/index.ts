@@ -1,11 +1,18 @@
-import UIText from "./ui-text";
-import UILayout from "./ui-layout";
 import UIButton from "./ui-button";
-import UISelect from "./ui-select";
-import UIQuery from "./ui-query";
 import UIInput from "./ui-input";
+import UILayout from "./ui-layout";
+import UIQuery from "./ui-query";
+import UISelect from "./ui-select";
+import UIText from "./ui-text";
 
-export default { UIText, UILayout, UISelect, UIButton, UIQuery, UIInput };
+export default {
+  UIText,
+  UILayout,
+  UISelect,
+  UIButton,
+  UIQuery,
+  UIInput
+};
 
 export const fontStyle = {
   fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif`

@@ -1,8 +1,18 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import Color from "./color";
+import Color from "../picker/color";
+import { observable } from "mobx";
 
+const config = observable({
+  isCallout: false,
+  key: null,
+  pickerRef: null
+});
 export default observer(({ state, callback }: any) => {
+  const colorChange = val => {
+    state.value.backgroundColor = val;
+    callback(state.value);
+  };
   return (
     <div
       style={{
@@ -28,7 +38,12 @@ export default observer(({ state, callback }: any) => {
         >
           Color
         </label>
-        <Color state={state} callback={callback} />
+        <Color
+          color={state.value.backgroundColor}
+          callback={colorChange}
+          config={config}
+          keyid="backgroundcolor"
+        />
       </div>
     </div>
   );

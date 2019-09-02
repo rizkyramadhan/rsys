@@ -1,12 +1,22 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import Size from "./size";
-import Color from "./color";
+import Color from "../picker/color";
 import { Dropdown, Icon } from "office-ui-fabric-react";
 import { dropdownStyles, dropdownStyle } from "..";
 import Align from "./align";
+import { observable } from "mobx";
 
+const config = observable({
+  isCallout: false,
+  key: null,
+  pickerRef: null
+});
 export default observer(({ state, callback }: any) => {
+  const colorChange = val => {
+    state.value.color = val;
+    callback(state.value);
+  };
   return (
     <div
       style={{
@@ -32,7 +42,12 @@ export default observer(({ state, callback }: any) => {
         >
           Color
         </label>
-        <Color state={state} callback={callback} />
+        <Color
+          color={state.value.color}
+          callback={colorChange}
+          config={config}
+          keyid="textcolor"
+        />
       </div>
       <div
         style={{

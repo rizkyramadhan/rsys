@@ -1,4 +1,3 @@
-import { observable } from "mobx";
 import { observer } from "mobx-react-lite";
 import {
   Callout,
@@ -6,21 +5,19 @@ import {
   DefaultButton,
   TextField
 } from "office-ui-fabric-react";
-import React from "react";
+import React, { useEffect } from "react";
 
-const config = observable({
-  isCallout: false
-});
-export default observer(({ state, callback }: any) => {
-  const change = (e, key) => {
-    state.value[key] = e.nativeEvent.target.value;
-    callback(state.value);
+export default observer(({ color, callback, config, keyid }: any) => {
+  const change = e => {
+    callback(e.nativeEvent.target.value);
   };
-  const changePicker = (color, key) => {
-    state.value[key] = color.str;
-    callback(state.value);
+  const changePicker = color => {
+    callback(color.str);
   };
-  const pickerRef = React.createRef<HTMLDivElement>();
+  useEffect(() => {
+    config.key =
+      keyid + "-" + Math.floor(100000000 + Math.random() * 900000000);
+  }, []);
   return (
     <div
       style={{
@@ -35,31 +32,29 @@ export default observer(({ state, callback }: any) => {
           flexDirection: "row",
           alignItems: "stretch"
         }}
-        ref={pickerRef}
+        // ref={pickerRef}
       >
-        <TextField
-          styles={inputStyle}
-          value={state.value.backgroundColor}
-          onChange={e => change(e, "backgroundColor")}
-        />
+        <TextField styles={inputStyle} value={color} onChange={change} />
         <DefaultButton
           text=""
           title="Color Picker"
           ariaLabel="Color Picker"
           styles={btnStyles}
           style={{
-            backgroundColor: state.value.backgroundColor
+            backgroundColor: color
           }}
-          onClick={() => (config.isCallout = true)}
+          onClick={e => {
+            config.isCallout = true;
+            config.pickerRef = e.nativeEvent;
+          }}
         />
       </div>
       <Callout
         className="ms-CalloutExample-callout"
-        ariaLabelledBy="bg-color-picker-label"
-        ariaDescribedBy="bg-color-picker-desc"
+        ariaLabelledBy={config.key + "tx-color-picker-label"}
         role="alertdialog"
         gapSpace={0}
-        target={pickerRef}
+        target={config.pickerRef}
         onDismiss={() => {
           config.isCallout = !config.isCallout;
         }}
@@ -68,15 +63,15 @@ export default observer(({ state, callback }: any) => {
       >
         <div>
           <ColorPicker
-            color={state.value.backgroundColor}
-            onChange={(_e, color) => changePicker(color, "backgroundColor")}
+            color={color}
+            onChange={(_e, color) => changePicker(color)}
             alphaSliderHidden={false}
           />
 
           <div>
             <div
               style={{
-                backgroundColor: state.value.backgroundColor
+                backgroundColor: color
               }}
             />
           </div>

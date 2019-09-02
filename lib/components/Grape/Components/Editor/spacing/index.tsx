@@ -44,7 +44,10 @@ export default observer((props: any) => {
   useEffect(() => {
     state.value = props.state.value;
     Object.keys(state.value).forEach(key => {
-      if (key.includes("margin") || key.includes("padding"))
+      if (
+        state.value[key] &&
+        (key.includes("margin") || key.includes("padding"))
+      )
         state.value[key].replace("px", "");
     });
   }, [props.state.value]);

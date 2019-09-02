@@ -33,6 +33,7 @@ const ReactEl = observer(({ state }: any) => {
         <div
           style={{
             ...fontStyle,
+            ...customStyle,
             ...customTextStyle
           }}
         >

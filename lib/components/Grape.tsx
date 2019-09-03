@@ -1,17 +1,17 @@
-import GrapesJS from "grapesjs";
-import Head from "next/head";
-import { useEffect, useState, forwardRef } from "react";
-import basicBlocks from "./Grape/Blocks/Basic/index";
-import dataBlocks from "./Grape/Blocks/Data/index";
-import basicComponents from "./Grape/Components/index";
+import GrapesJS from 'grapesjs';
+import Head from 'next/head';
+import { useEffect, useState, forwardRef } from 'react';
+import basicBlocks from './Grape/Blocks/Basic/index';
+import dataBlocks from './Grape/Blocks/Data/index';
+import basicComponents from './Grape/Components/index';
 
-import "./Grape/Elements";
+import './Grape/Elements';
 
 export default forwardRef(
   (
     {
-      id = "grapesjs-react-editor",
-      content = "",
+      id = 'grapesjs-react-editor',
+      content = '',
       components = [],
       blocks = [],
       plugins = [],
@@ -32,7 +32,7 @@ export default forwardRef(
 
     useEffect(() => {
       setTimeout(() => {
-        window.dispatchEvent(new Event("resize"));
+        window.dispatchEvent(new Event('resize'));
       }, 2000);
       if (!editor) {
         const e = GrapesJS.init({
@@ -43,8 +43,8 @@ export default forwardRef(
           components: content,
           keymaps: {
             defaults: {
-              "rsys:save": {
-                keys: "⌘+s, ctrl+s",
+              'rsys:save': {
+                keys: '⌘+s, ctrl+s',
                 handler: save
               }
             }
@@ -53,22 +53,22 @@ export default forwardRef(
         });
 
         const wrapperStyle = e.getWrapper().view.$el[0].style;
-        wrapperStyle.display = "flex";
-        wrapperStyle.alignItems = "stretch";
-        wrapperStyle.flexDirection = "column";
+        wrapperStyle.display = 'flex';
+        wrapperStyle.alignItems = 'stretch';
+        wrapperStyle.flexDirection = 'column';
 
         blocks.forEach((block: any) => {
           e.BlockManager.add(block.id, block);
         });
         setEditor(e);
         setupEditor(e);
-        e.Panels.removeButton("options", "export-template");
-        e.Panels.removeButton("views", "open-sm");
-        e.Panels.removePanel("views-container");
-        e.runCommand("open-blocks");
+        e.Panels.removeButton('options', 'export-template');
+        e.Panels.removeButton('views', 'open-sm');
+        e.Panels.removePanel('views-container');
+        e.runCommand('open-blocks');
 
-        const openTmRun = e.Commands.get("open-tm").run;
-        e.Commands.extend("open-tm", {
+        const openTmRun = e.Commands.get('open-tm').run;
+        e.Commands.extend('open-tm', {
           run: function(editor, sender) {
             openTmRun.bind(this)(editor, sender);
             const tmv = this.$cn2[0];
@@ -81,10 +81,13 @@ export default forwardRef(
           const pn = e.Panels;
           const openSmBtn = pn.getButton('views', 'open-tm');
           const openLayersBtn = pn.getButton('views', 'open-layers');
-      
+
           // Don't switch when the Layer Manager is on or
           // there is no selected component
-          if ((!openLayersBtn || !openLayersBtn.get('active')) && e.getSelected()) {
+          if (
+            (!openLayersBtn || !openLayersBtn.get('active')) &&
+            e.getSelected()
+          ) {
             openSmBtn && openSmBtn.set('active', 1);
           }
         });
@@ -111,9 +114,9 @@ export default forwardRef(
     }, []);
 
     return (
-      <div id={id}>
+      <div id={id} style={{ flex: 1 }}>
         <Head>
-          <link rel="stylesheet" href="/static/grapesjs/css/grapes.min.css" />
+          <link rel='stylesheet' href='/static/grapesjs/css/grapes.min.css' />
         </Head>
       </div>
     );

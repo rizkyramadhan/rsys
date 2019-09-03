@@ -19,12 +19,12 @@ export default function(editor, opt: any = {}) {
           {
             type: "checkbox",
             label: "Disabled",
-            name: "buttondisable"
+            name: "disabled"
           },
           {
             type: "select",
             label: "Mode",
-            name: "buttonmode",
+            name: "status",
             options: [
               { id: "primary", name: "Primary" },
               { id: "success", name: "Success" },
@@ -38,7 +38,7 @@ export default function(editor, opt: any = {}) {
           {
             type: "select",
             label: "Size",
-            name: "buttonSize",
+            name: "size",
             options: [
               { id: "giant", name: "Giant" },
               { id: "large", name: "Large" },

@@ -43,6 +43,10 @@ export default () => {
 
   return prettier.format(script, { parser: 'typescript' });
 };
+const formatKey = (key: string) => {
+  if (key.indexOf('_') === 0) return key.substr(1);
+  return key;
+};
 
 const walk = (json, imprt, isRoot = true) => {
   const result = [];
@@ -52,9 +56,13 @@ const walk = (json, imprt, isRoot = true) => {
       const atkeys = Object.keys(item.attribs || {});
       let single = `<${tag} ${
         atkeys.length > 0
-          ? atkeys.map(key => {
-              return `${key}={${JSON.stringify(item.attribs[key])}}`;
-            })
+          ? atkeys
+              .map(key => {
+                return `${formatKey(key)}={${JSON.stringify(
+                  item.attribs[key]
+                )}}`;
+              })
+              .join(' ')
           : ''
       }`;
 

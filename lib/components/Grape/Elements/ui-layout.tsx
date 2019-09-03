@@ -9,7 +9,7 @@ const ReactEl = observer(({ state }: any) => {
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    ...JSON.parse(state.attr.layoutstyle || "{}")
+    ...JSON.parse(state.attr._style || "{}")
   };
   const styleString = Object.entries(customStyle).reduce(
     (styleString, [propName, propValue]) => {

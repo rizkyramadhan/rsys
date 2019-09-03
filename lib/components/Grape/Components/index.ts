@@ -55,10 +55,10 @@ const styleManager = {
     noLabel: true,
     templateInput: "",
     createInput: ({ trait, component }) => {
-      let value = JSON.parse(component.getAttributes().layoutstyle || "{}");
+      let value = JSON.parse(component.getAttributes()._style || "{}");
       const callback = newVal => {
         component.addAttributes({
-          layoutstyle: JSON.stringify(newVal)
+          _style: JSON.stringify(newVal)
         });
       };
       return EditorDom("global", value, callback);

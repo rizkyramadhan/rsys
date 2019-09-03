@@ -5,6 +5,7 @@ import {
   ImportDeclaration
 } from 'ts-morph';
 import { parseTag } from './parser';
+import { convertToHtml } from './converthtml';
 
 export class paramsModel {
   name: String;
@@ -216,14 +217,7 @@ export function mDefault(sf: any): any {
       .getExpression()
       .getFirstChildByKindOrThrow(SyntaxKind.JsxElement);
 
-    return {
-      index: expt.getChildIndex(),
-      wrapper: [],
-      props: [],
-      data: [],
-      effects: [],
-      render: parseTag(expr)
-    };
+    return convertToHtml(parseTag(expr));
   }
   return null;
 }

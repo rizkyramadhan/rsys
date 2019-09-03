@@ -3,7 +3,6 @@ import Container from '@lib/components/Container';
 import FileTree, { sortFileTree } from '@lib/components/File/FileTree';
 import RootDrop from '@lib/components/File/RootDrop';
 import store from '@lib/store';
-import fetch from 'isomorphic-unfetch';
 import _ from 'lodash';
 import { observer, useObservable } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
@@ -16,10 +15,11 @@ const Grape = dynamic(import('@lib/components/Grape'), {
 });
 let editor = null;
 const save = async () => {
-  const res = await api.post('file/save', {
+  console.log(editor.getHtml());
+  return;
+  await api.post('file/save', {
     content: editor.getHtml()
   });
-  console.log(res.json);
 };
 const Page = (_props: any) => {
   const data = useObservable({
@@ -34,9 +34,13 @@ const Page = (_props: any) => {
   useEffect(expandDir.bind(data), [data.selected]);
   useEffect(() => {
     window.addEventListener('keydown', saveKey, false);
-    if (data.selected) {
-      readFile();
-    }
+    const fetch = async () => {
+      if (data.selected) {
+        store.activePage.content = await readFile();
+        store.activePage.path = data.selected;
+      }
+    };
+    fetch();
 
     return () => {
       window.removeEventListener('keydown', saveKey);
@@ -47,7 +51,7 @@ const Page = (_props: any) => {
     const res = await api.get(`file/read?path=${data.selected}`);
     // store.activePage.path = data.selected;
     // store.activePage.content = res;
-    console.log(res);
+    return res;
   };
 
   return (
@@ -140,16 +144,6 @@ const Page = (_props: any) => {
       </div>
     </Container>
   );
-};
-
-Page.getInitialProps = async ({ req }: any) => {
-  if (req) {
-    const res = await fetch('https://api.github.com/repos/zeit/next.js');
-    const json = await res.json();
-    return { stars: json.stargazers_count, path: process.cwd() };
-  }
-
-  return {};
 };
 
 export default observer(Page);

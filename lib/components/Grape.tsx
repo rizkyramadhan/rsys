@@ -26,9 +26,11 @@ export default forwardRef(
 
     useEffect(() => {
       if (editor) {
-        editor.setComponents(content);
+        setTimeout(() => {
+          editor.setComponents(content);
+        }, 1000);
       }
-    }, [content]);
+    }, [content, editor]);
 
     useEffect(() => {
       setTimeout(() => {

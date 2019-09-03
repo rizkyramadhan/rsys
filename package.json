@@ -25,6 +25,7 @@
     "fs-jetpack": "^2.2.2",
     "grapesjs": "^0.15.3",
     "grapesjs-blocks-basic": "^0.1.8",
+    "html-entities": "^1.2.1",
     "isomorphic-unfetch": "^3.0.0",
     "knex": "^0.19.2",
     "lodash": "^4.17.15",

@@ -7,7 +7,8 @@ const components = [
   require("./ui-button"),
   require("./ui-select"),
   require("./ui-query"),
-  require("./ui-input")
+  require("./ui-input"),
+  require("./ui-code")
 ];
 
 export default grapesjs.plugins.add(

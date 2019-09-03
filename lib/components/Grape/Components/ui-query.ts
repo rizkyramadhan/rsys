@@ -1,7 +1,10 @@
-import api from '@lib/api';
+import api from "@lib/api";
+import { observable } from "mobx";
+import { defineElementDirect } from "../Elements/util";
 
 export default function(editor, _: any = {}) {
   let dc = editor.DomComponents;
+  let tm = editor.TraitManager;
   const config = require("../../../../rsys.config.json");
   let db = Object.keys(config.db || {}).map(db => {
     return db;
@@ -9,6 +12,15 @@ export default function(editor, _: any = {}) {
 
   dc.addType("query-ui", {
     model: {
+      init() {
+        let id = 1;
+        this.collection.models.forEach(d => {
+          if (d.attributes.type === "query-ui") {
+            id++;
+          }
+        });
+        this.attributes.attributes.name = "query" + id;
+      },
       defaults: {
         traits: [
           {
@@ -16,21 +28,23 @@ export default function(editor, _: any = {}) {
             type: "label"
           },
           {
-            type: "select", // Type of the trait
-            label: "DB", // The label you will see in Settings
-            name: "conn", // The name of the attribute/property to use on component
-            options: db
+            type: "text",
+            label: "Name",
+            name: "name",
+            default: ""
           },
           {
-            type: "text",
+            type: "select",
+            label: "DB",
+            name: "conn",
+            options: db,
+            default: db[0]
+          },
+          {
+            type: "text-sql",
             name: "sql",
-            label: "Sql"
-          },
-          {
-            type: "text",
-            name: "params",
-            label: "Params",
-            placeholder: "sparator with coma (ex: 1,2,3)"
+            label: "Sql",
+            placeholder: "select *"
           },
           {
             type: "button",
@@ -40,7 +54,6 @@ export default function(editor, _: any = {}) {
             command: e => {
               alert("Open console to view a result.");
               console.clear();
-
               const attr = e.getSelected().attributes.attributes;
               const data = {};
               Object.keys(attr).forEach(k => {
@@ -55,9 +68,9 @@ export default function(editor, _: any = {}) {
               });
 
               api
-                .post("/api/db/query", data)
+                .post("/db/query", data)
                 .then(function(response) {
-                  console.log(response.data.result);
+                  console.log(response.result);
                 })
                 .catch(function(error) {
                   console.log(error);
@@ -66,6 +79,24 @@ export default function(editor, _: any = {}) {
           }
         ]
       }
+    }
+  });
+
+  tm.addType("text-sql", {
+    // Expects as return a simple HTML string or an HTML element
+    createInput({ trait, component }) {
+      const el = document.createElement("div");
+      el.innerHTML = `
+          <textarea class="text-sql__type" placeholder="${trait.attributes.placeholder}" rows="4"></textarea>
+      `;
+      return el;
+    },
+    onEvent({ elInput, component }) {
+      const sql = elInput.querySelector(".text-sql__type").value;
+      console.log(sql);
+      component.addAttributes({
+        sql
+      });
     }
   });
 }

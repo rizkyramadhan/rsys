@@ -3,7 +3,8 @@ import { observable } from "mobx";
 
 const reactEl = {
   global: require("./global").default,
-  typography: require("./typography").default
+  typography: require("./typography").default,
+  codeblock: require("./code").default
 };
 
 export default (elName, value, callback) => {
@@ -83,4 +84,14 @@ export const dropdownStyle = {
   display: "flex",
   flexGrow: 1,
   width: "100%"
+};
+
+export const textMultiline = {
+  label: {
+    fontWeight: 400
+  },
+  fieldGroup: {
+    backgroundColor: "#313742",
+    border: "0"
+  }
 };

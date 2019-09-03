@@ -9,7 +9,7 @@ const state = observable({
 });
 export default observer((props: any) => {
   const changeInput = (e, key) => {
-    state.value[key] = e.nativeEvent.target.value;
+    state.value[key] = e.nativeEvent.target.value + "px";
     callback(state.value);
     state.editable = "";
   };
@@ -29,7 +29,7 @@ export default observer((props: any) => {
       else if (["marginLeft", "paddingRight"].indexOf(value) > -1)
         v += moveX * -1;
       else if (["marginRight", "paddingLeft"].indexOf(value) > -1) v += moveX;
-      state.value[value] = v;
+      state.value[value] = v + "px";
     };
   };
   const callback = val => {
@@ -45,10 +45,11 @@ export default observer((props: any) => {
     state.value = props.state.value;
     Object.keys(state.value).forEach(key => {
       if (
-        state.value[key] &&
+        !!state.value[key] &&
         (key.includes("margin") || key.includes("padding"))
-      )
+      ) {
         state.value[key].replace("px", "");
+      }
     });
   }, [props.state.value]);
   return (

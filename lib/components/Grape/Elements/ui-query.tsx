@@ -6,20 +6,20 @@ const name = "query";
 const ReactEl = observer((props: any) => {
   return (
     <div style={{ textAlign: "center", color: "#9A9A9A", padding: 10 }}>
-      <strong>- QUERY -</strong>
+      <strong>{props.state.attr.name}</strong>
       <div>
         db: {props.state.attr.conn && <span>{props.state.attr.conn}</span>}
       </div>
       <div>
-        Sql:
+        sql:
         {props.state.attr.sql && <span> {props.state.attr.sql}</span>}
       </div>
-      <div>
+      {/* <div>
         Params:
         {props.state.attr.params && (
           <span> {JSON.stringify(props.state.attr.params.split(","))}</span>
         )}
-      </div>
+      </div> */}
     </div>
   );
 });

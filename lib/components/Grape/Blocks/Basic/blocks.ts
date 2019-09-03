@@ -36,4 +36,12 @@ export default function(editor, opt: any = {}) {
       attributes: { class: "fa fa-edit" },
       content: { type: "input-ui", tagName: `input-ui` }
     });
+
+  toAdd("code") &&
+    bm.add("code", {
+      label: "code",
+      category: c.category,
+      attributes: { class: "fa fa-code" },
+      content: { type: "code-ui", tagName: `code-ui` }
+    });
 }

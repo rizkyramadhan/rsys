@@ -6,7 +6,7 @@ import { fontStyle, mode } from ".";
 const name = "text";
 const ReactEl = observer(({ state }: any) => {
   const customStyle = {
-    ...JSON.parse(state.attr.layoutstyle || "{}")
+    ...JSON.parse(state.attr._style || "{}")
   };
   const customTextStyle = {
     ...JSON.parse(state.attr.textstyle || "{}"),

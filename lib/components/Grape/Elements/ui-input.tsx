@@ -6,7 +6,7 @@ import { mode } from ".";
 const name = "input";
 const ReactEl = observer(({ state }: any) => {
   const customStyle = {
-    ...JSON.parse(state.attr.layoutstyle || "{}")
+    ...JSON.parse(state.attr._style || "{}")
   };
   return (
     <div

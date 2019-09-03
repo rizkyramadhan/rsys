@@ -3,6 +3,10 @@ export const mapimport = {
     from: 'react-native-ui-kitten',
     type: 'named'
   },
+  Button: {
+    from: 'react-native-ui-kitten',
+    type: 'named'
+  },
   Layout: {
     from: 'react-native-ui-kitten',
     type: 'named'

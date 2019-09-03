@@ -6,13 +6,13 @@ import { fontStyle, mode } from ".";
 const name = "button";
 const ReactEl = observer(({ state }: any) => {
   const customStyle = {
-    ...JSON.parse(state.attr.layoutstyle || "{}")
+    ...JSON.parse(state.attr._style || "{}")
   };
   return (
     <div
       style={{
         ...defaultStyle,
-        backgroundColor: mode.background[state.attr.buttonmode],
+        backgroundColor: mode.background[state.attr.status],
         ...customStyle
       }}
     >
@@ -20,7 +20,7 @@ const ReactEl = observer(({ state }: any) => {
         style={{
           ...defaultLabel,
           ...fontStyle,
-          color: state.attr.buttonmode == "basic" ? "#313742" : "#F7F9FC",
+          color: state.attr.status == "basic" ? "#313742" : "#F7F9FC",
           ...size[state.attr.buttonsize]
         }}
       >

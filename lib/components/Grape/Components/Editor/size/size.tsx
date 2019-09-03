@@ -1,6 +1,6 @@
-import { observer } from "mobx-react-lite";
-import React from "react";
-import { TextField } from "office-ui-fabric-react";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import { TextField } from 'office-ui-fabric-react';
 
 export default observer(({ state, callback }: any) => {
   const change = (e, key) => {
@@ -10,32 +10,32 @@ export default observer(({ state, callback }: any) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        marginTop: "10px"
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '10px'
       }}
     >
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
+          display: 'flex',
+          flexDirection: 'row',
+          margin: '0 10px 5px',
+          alignItems: 'stretch'
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch"
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch'
           }}
         >
           <label
             style={{
-              width: "50%",
-              display: "flex",
-              alignItems: "center",
-              margin: "0 10px 0 0"
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              margin: '0 10px 0 0'
             }}
           >
             Width
@@ -43,22 +43,22 @@ export default observer(({ state, callback }: any) => {
           <TextField
             styles={inputStyle}
             value={state.value.width}
-            onChange={e => change(e, "width")}
+            onChange={e => change(e, 'width')}
           />
         </div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch"
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch'
           }}
         >
           <label
             style={{
-              width: "50%",
-              display: "flex",
-              alignItems: "center",
-              margin: "0 10px 0 10px"
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              margin: '0 10px 0 10px'
             }}
           >
             Height
@@ -66,31 +66,32 @@ export default observer(({ state, callback }: any) => {
           <TextField
             styles={inputStyle}
             value={state.value.height}
-            onChange={e => change(e, "height")}
+            onChange={e => change(e, 'height')}
           />
         </div>
       </div>
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
+          display: 'flex',
+          flexDirection: 'row',
+          margin: '0 10px 5px',
+          alignItems: 'stretch'
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch"
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch'
           }}
         >
           <label
             style={{
-              width: "50%",
-              display: "flex",
-              alignItems: "center",
-              margin: "0 10px 0 0"
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              whiteSpace: 'nowrap',
+              margin: '0 10px 0 0'
             }}
           >
             Min W
@@ -98,22 +99,23 @@ export default observer(({ state, callback }: any) => {
           <TextField
             styles={inputStyle}
             value={state.value.minWidth}
-            onChange={e => change(e, "minWidth")}
+            onChange={e => change(e, 'minWidth')}
           />
         </div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch"
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch'
           }}
         >
           <label
             style={{
-              width: "50%",
-              display: "flex",
-              alignItems: "center",
-              margin: "0 10px 0 10px"
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              whiteSpace: 'nowrap',
+              margin: '0 10px 0 10px'
             }}
           >
             Min H
@@ -121,31 +123,32 @@ export default observer(({ state, callback }: any) => {
           <TextField
             styles={inputStyle}
             value={state.value.minHeight}
-            onChange={e => change(e, "minHeight")}
+            onChange={e => change(e, 'minHeight')}
           />
         </div>
       </div>
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
+          display: 'flex',
+          flexDirection: 'row',
+          margin: '0 10px 5px',
+          alignItems: 'stretch'
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch"
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch'
           }}
         >
           <label
             style={{
-              width: "50%",
-              display: "flex",
-              alignItems: "center",
-              margin: "0 10px 0 0"
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              whiteSpace: 'nowrap',
+              margin: '0 10px 0 0'
             }}
           >
             Min W
@@ -153,22 +156,23 @@ export default observer(({ state, callback }: any) => {
           <TextField
             styles={inputStyle}
             value={state.value.maxWidth}
-            onChange={e => change(e, "maxWidth")}
+            onChange={e => change(e, 'maxWidth')}
           />
         </div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch"
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch'
           }}
         >
           <label
             style={{
-              width: "50%",
-              display: "flex",
-              alignItems: "center",
-              margin: "0 10px 0 10px"
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              whiteSpace: 'nowrap',
+              margin: '0 10px 0 10px'
             }}
           >
             Min H
@@ -176,7 +180,7 @@ export default observer(({ state, callback }: any) => {
           <TextField
             styles={inputStyle}
             value={state.value.maxHeight}
-            onChange={e => change(e, "maxHeight")}
+            onChange={e => change(e, 'maxHeight')}
           />
         </div>
       </div>
@@ -186,11 +190,11 @@ export default observer(({ state, callback }: any) => {
 
 const inputStyle: any = {
   fieldGroup: {
-    backgroundColor: "#2b313b",
+    backgroundColor: '#2b313b',
     border: 0,
-    height: "22px"
+    height: '22px'
   },
   field: {
-    height: "21px"
+    height: '21px'
   }
 };

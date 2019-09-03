@@ -1,15 +1,15 @@
-import fetch from 'isomorphic-unfetch';
-import React, { useEffect, useRef } from 'react';
-import Container from '@lib/components/Container';
-import dynamic from 'next/dynamic';
-import { observer, useObservable } from 'mobx-react-lite';
-import store from '@lib/store';
 import api from '@lib/api';
-import RootDrop from '@lib/components/File/RootDrop';
-import { DndProvider } from 'react-dnd-cjs';
+import Container from '@lib/components/Container';
 import FileTree, { sortFileTree } from '@lib/components/File/FileTree';
+import RootDrop from '@lib/components/File/RootDrop';
+import store from '@lib/store';
+import fetch from 'isomorphic-unfetch';
+import _ from 'lodash';
+import { observer, useObservable } from 'mobx-react-lite';
+import dynamic from 'next/dynamic';
+import React, { useEffect } from 'react';
+import { DndProvider } from 'react-dnd-cjs';
 import HTML5Backend from 'react-dnd-html5-backend-cjs';
-import _ from "lodash";
 
 const Grape = dynamic(import('@lib/components/Grape'), {
   ssr: false
@@ -32,13 +32,24 @@ const Page = (_props: any) => {
   });
   useEffect(loadDir.bind(data), []);
   useEffect(expandDir.bind(data), [data.selected]);
-
   useEffect(() => {
     window.addEventListener('keydown', saveKey, false);
+    if (data.selected) {
+      readFile();
+    }
+
     return () => {
       window.removeEventListener('keydown', saveKey);
     };
   }, []);
+
+  const readFile = async () => {
+    const res = await api.get(`file/read?path=${data.selected}`);
+    // store.activePage.path = data.selected;
+    // store.activePage.content = res;
+    console.log(res);
+  };
+
   return (
     <Container>
       <div style={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
@@ -56,7 +67,10 @@ const Page = (_props: any) => {
                 data.contextmenu = file.relativePath;
               }}
               onSelect={(file: any) => {
-                if (file.type === 'file') data.selected = file.relativePath;
+                if (file.type === 'file') {
+                  data.selected = file.relativePath;
+                  data.selected;
+                }
               }}
               onDragHover={(from: any, to: any) => {
                 if (to.type === 'dir') {
@@ -109,7 +123,12 @@ const Page = (_props: any) => {
             />
           </DndProvider>
         </div>
-        <div style={{ flex: 1 }}>
+        <div
+          style={{
+            flex: 1,
+            display: 'flex'
+          }}
+        >
           <Grape
             content={store.activePage.content}
             setupEditor={e => {

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import Color from "../picker/color";
+import Color from "../components/color-picker";
 import { observable } from "mobx";
 
 const config = observable({

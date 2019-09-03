@@ -48,10 +48,10 @@ export default function(editor, opt: any = {}) {
     noLabel: true,
     templateInput: "",
     createInput: ({ trait, component }) => {
-      let value = JSON.parse(component.getAttributes().textstyle || "{}");
+      let value = JSON.parse(component.getAttributes()._style || "{}");
       const callback = newVal => {
         component.addAttributes({
-          textstyle: JSON.stringify(newVal)
+          _style: JSON.stringify(newVal)
         });
       };
       return EditorDom("typography", value, callback);

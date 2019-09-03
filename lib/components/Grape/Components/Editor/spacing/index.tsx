@@ -45,7 +45,7 @@ export default observer((props: any) => {
     state.value = props.state.value;
     Object.keys(state.value).forEach(key => {
       if (
-        state.value[key] &&
+        !!state.value[key] &&
         (key.includes("margin") || key.includes("padding"))
       ) {
         state.value[key].replace("px", "");

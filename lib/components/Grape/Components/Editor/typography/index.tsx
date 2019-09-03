@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import Size from "./size";
-import Color from "../picker/color";
+import Color from "../components/color-picker";
 import { Dropdown, Icon } from "office-ui-fabric-react";
 import { dropdownStyles, dropdownStyle } from "..";
 import Align from "./align";

@@ -1,9 +1,7 @@
 
-export default function(editor, opt: any = {}) {
-  const c = opt;
+export default function(editor, _: any = {}) {
   let dc = editor.DomComponents;
-  let dt = editor.TraitManager;
-  const config = require('../../../../rsys.config.json');
+  const config = require("../../../../rsys.config.json");
   let db = Object.keys(config.db || {}).map(db => {
     return db;
   });
@@ -12,10 +10,10 @@ export default function(editor, opt: any = {}) {
     model: {
       defaults: {
         traits: [
-          // {
-          //   label: "Attributes",
-          //   type: "label"
-          // },
+          {
+            label: "Attributes",
+            type: "label"
+          },
           {
             type: 'select', // Type of the trait
             label: 'DB', // The label you will see in Settings

@@ -10,7 +10,7 @@ export default (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.statusCode = 200;
 
-  const p: IParams = req.body;
+  const p: IParams = JSON.parse(req.body);
   const knex = conn(p.conn);
   knex
     .raw(p.sql, p.params)

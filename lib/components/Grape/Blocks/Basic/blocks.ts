@@ -44,4 +44,16 @@ export default function(editor, opt: any = {}) {
       attributes: { class: "fa fa-code" },
       content: { type: "code-ui", tagName: `code-ui` }
     });
+
+  toAdd("statement") &&
+    bm.add("statement", {
+      label: "if-statement",
+      category: c.category,
+      attributes: { class: "fa" },
+      content: { type: "statement-ui", tagName: `statement-ui` },
+      render: ({ model, className }) =>
+        `<div class="${className}__my-wrap">if</div><div class="gjs-block-label">${model.get(
+          "label"
+        )}</div>`
+    });
 }

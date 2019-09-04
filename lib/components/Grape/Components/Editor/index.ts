@@ -1,14 +1,14 @@
-import { defineElementDirect } from "../../Elements/util";
-import { observable } from "mobx";
+import { defineElementDirect } from '../../Elements/util';
+import { observable } from 'mobx';
 
 const reactEl = {
-  global: require("./global").default,
-  typography: require("./typography").default,
-  codeblock: require("./code").default
+  global: require('./global').default,
+  typography: require('./typography').default,
+  codeblock: require('./code').default
 };
 
 export default (elName, value, callback) => {
-  const el = document.createElement("div");
+  const el = document.createElement('div');
   const state = observable({
     value: value
   });
@@ -21,69 +21,70 @@ export default (elName, value, callback) => {
 
 export const groupNameStyles = {
   label: {
-    textAlign: "left",
-    letterSpacing: "1px"
+    textAlign: 'left',
+    fontSize: '14px',
+    letterSpacing: 'normal'
   },
   icon: {
-    fontSize: "10px"
+    fontSize: '10px'
   },
   root: {
-    border: "0",
-    borderBottom: "1px solid rgba(0,0,0,0.2)",
-    backgroundColor: "#313742",
-    padding: "0 10px"
+    border: '0',
+    borderBottom: '1px solid rgba(0,0,0,0.2)',
+    backgroundColor: '#313742',
+    padding: '0 10px'
   }
 };
 
 export const btnIconRadioStyles = {
   root: {
-    borderLeft: "1px solid rgba(0,0,0,0.2)"
+    borderLeft: '1px solid rgba(0,0,0,0.2)'
   },
   rootChecked: {
-    backgroundColor: "rgba(255,255,255,0.2)"
+    backgroundColor: 'rgba(255,255,255,0.2)'
   }
 };
 
 export const btnIconRadioStyle = {
-  display: "flex",
+  display: 'flex',
   flexGrow: 1,
-  justifyContent: "center"
+  justifyContent: 'center'
 };
 
 export const btnStyles = {
   root: {
-    border: "0",
-    borderLeft: "1px solid rgba(0,0,0,0.2)",
-    backgroundColor: "transparent"
+    border: '0',
+    borderLeft: '1px solid rgba(0,0,0,0.2)',
+    backgroundColor: 'transparent'
   },
   rootChecked: {
-    backgroundColor: "rgba(255,255,255,0.2)"
+    backgroundColor: 'rgba(255,255,255,0.2)'
   }
 };
 
 export const dropdownStyles = {
   root: {
-    width: "100%"
+    width: '100%'
   },
   title: {
-    border: "0px",
-    height: "22px",
-    lineHeight: "20px",
+    border: '0px',
+    height: '22px',
+    lineHeight: '20px',
     flexGrow: 1,
-    width: "100%",
-    backgroundColor: "rgb(43, 49, 59)"
+    width: '100%',
+    backgroundColor: 'rgb(43, 49, 59)'
   },
   caretDownWrapper: {
-    lineHeight: "20px",
-    height: "22px",
-    fontSize: "8px"
+    lineHeight: '20px',
+    height: '22px',
+    fontSize: '8px'
   }
 };
 
 export const dropdownStyle = {
-  display: "flex",
+  display: 'flex',
   flexGrow: 1,
-  width: "100%"
+  width: '100%'
 };
 
 export const textMultiline = {
@@ -91,7 +92,7 @@ export const textMultiline = {
     fontWeight: 400
   },
   fieldGroup: {
-    backgroundColor: "#313742",
-    border: "0"
+    backgroundColor: '#313742',
+    border: '0'
   }
 };

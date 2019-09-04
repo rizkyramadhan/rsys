@@ -24,10 +24,6 @@ export default function(editor, _: any = {}) {
       defaults: {
         traits: [
           {
-            label: "Attributes",
-            type: "label"
-          },
-          {
             type: "text",
             label: "Name",
             name: "name",

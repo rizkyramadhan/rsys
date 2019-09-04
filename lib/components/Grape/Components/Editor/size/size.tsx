@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { TextField } from 'office-ui-fabric-react';
+import { TextField, Label } from 'office-ui-fabric-react';
 
 export default observer(({ state, callback }: any) => {
   const change = (e, key) => {
@@ -30,16 +30,17 @@ export default observer(({ state, callback }: any) => {
             alignItems: 'stretch'
           }}
         >
-          <label
+          <Label
             style={{
               width: '50%',
+              fontSize: '12px',
               display: 'flex',
               alignItems: 'center',
               margin: '0 10px 0 0'
             }}
           >
             Width
-          </label>
+          </Label>
           <TextField
             styles={inputStyle}
             value={state.value.width}
@@ -53,16 +54,17 @@ export default observer(({ state, callback }: any) => {
             alignItems: 'stretch'
           }}
         >
-          <label
+          <Label
             style={{
               width: '50%',
+              fontSize: '12px',
               display: 'flex',
               alignItems: 'center',
               margin: '0 10px 0 10px'
             }}
           >
             Height
-          </label>
+          </Label>
           <TextField
             styles={inputStyle}
             value={state.value.height}
@@ -85,9 +87,10 @@ export default observer(({ state, callback }: any) => {
             alignItems: 'stretch'
           }}
         >
-          <label
+          <Label
             style={{
               width: '50%',
+              fontSize: '12px',
               display: 'flex',
               alignItems: 'center',
               whiteSpace: 'nowrap',
@@ -95,7 +98,7 @@ export default observer(({ state, callback }: any) => {
             }}
           >
             Min W
-          </label>
+          </Label>
           <TextField
             styles={inputStyle}
             value={state.value.minWidth}
@@ -109,17 +112,18 @@ export default observer(({ state, callback }: any) => {
             alignItems: 'stretch'
           }}
         >
-          <label
+          <Label
             style={{
               width: '50%',
               display: 'flex',
+              fontSize: '12px',
               alignItems: 'center',
               whiteSpace: 'nowrap',
               margin: '0 10px 0 10px'
             }}
           >
             Min H
-          </label>
+          </Label>
           <TextField
             styles={inputStyle}
             value={state.value.minHeight}
@@ -142,9 +146,10 @@ export default observer(({ state, callback }: any) => {
             alignItems: 'stretch'
           }}
         >
-          <label
+          <Label
             style={{
               width: '50%',
+              fontSize: '12px',
               display: 'flex',
               alignItems: 'center',
               whiteSpace: 'nowrap',
@@ -152,7 +157,7 @@ export default observer(({ state, callback }: any) => {
             }}
           >
             Min W
-          </label>
+          </Label>
           <TextField
             styles={inputStyle}
             value={state.value.maxWidth}
@@ -166,9 +171,10 @@ export default observer(({ state, callback }: any) => {
             alignItems: 'stretch'
           }}
         >
-          <label
+          <Label
             style={{
               width: '50%',
+              fontSize: '12px',
               display: 'flex',
               alignItems: 'center',
               whiteSpace: 'nowrap',
@@ -176,7 +182,7 @@ export default observer(({ state, callback }: any) => {
             }}
           >
             Min H
-          </label>
+          </Label>
           <TextField
             styles={inputStyle}
             value={state.value.maxHeight}

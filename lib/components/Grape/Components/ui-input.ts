@@ -8,10 +8,6 @@ export default function(editor, opt: any = {}) {
         dropable: false,
         traits: [
           {
-            label: "Attributes",
-            type: "label"
-          },
-          {
             label: "Placeholder",
             name: "inputplaceholder"
           },

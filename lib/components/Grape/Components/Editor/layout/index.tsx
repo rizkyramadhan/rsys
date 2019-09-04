@@ -1,73 +1,80 @@
-import { observer } from "mobx-react-lite";
-import React from "react";
-import AlignItems from "./align-items";
-import FlexDirection from "./flex-direction";
-import JustifyContent from "./justify-content";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import AlignItems from './align-items';
+import FlexDirection from './flex-direction';
+import JustifyContent from './justify-content';
+import { Label } from 'office-ui-fabric-react';
 
 export default observer((props: any) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        marginTop: "10px"
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '10px'
       }}
     >
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
+          display: 'flex',
+          flexDirection: 'row',
+          margin: '0 10px 5px',
+          alignItems: 'stretch'
         }}
       >
-        <label
+        <Label
           style={{
-            width: "25%",
-            display: "flex",
-            alignItems: "center"
+            width: '25%',
+            display: 'flex',
+            marginRight: 10,
+            fontSize: '12px',
+            alignItems: 'center'
           }}
         >
           Direction
-        </label>
+        </Label>
         <FlexDirection {...props} />
       </div>
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
+          display: 'flex',
+          flexDirection: 'row',
+          margin: '0 10px 5px',
+          alignItems: 'stretch'
         }}
       >
-        <label
+        <Label
           style={{
-            width: "25%",
-            display: "flex",
-            alignItems: "center"
+            width: '25%',
+            fontSize: '12px',
+            marginRight: 10,
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
           Align
-        </label>
+        </Label>
         <AlignItems {...props} />
       </div>
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
+          display: 'flex',
+          flexDirection: 'row',
+          margin: '0 10px 5px',
+          alignItems: 'stretch'
         }}
       >
-        <label
+        <Label
           style={{
-            width: "25%",
-            display: "flex",
-            alignItems: "center"
+            width: '25%',
+            fontSize: '12px',
+            marginRight: 10,
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
           Justify
-        </label>
+        </Label>
         <JustifyContent {...props} />
       </div>
     </div>

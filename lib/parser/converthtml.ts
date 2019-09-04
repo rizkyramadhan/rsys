@@ -12,7 +12,7 @@ const walk = tags => {
             return `${prop.text}="${entities.encode(JSON.stringify(prop.text))}"`;
           }
         }) || [];
-      let res = `<${tagname} ${props.join(' ')}>`;
+      let res = `<${tagname} data-gjs-type="${tagname}" ${props.join(' ')}>`;
       if (tag.children) {
         res += walk(tag.children);
       }

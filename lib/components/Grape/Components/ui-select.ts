@@ -11,10 +11,6 @@ export default function(editor, _: any = {}) {
       defaults: {
         traits: [
           {
-            label: "Attributes",
-            type: "label"
-          },
-          {
             type: 'select', // Type of the trait
             label: 'DB', // The label you will see in Settings
             name: 'conn', // The name of the attribute/property to use on component

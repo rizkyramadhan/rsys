@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import Color from "../components/color-picker";
 import { observable } from "mobx";
+import { Label } from 'office-ui-fabric-react';
 
 const config = observable({
   isCallout: false,
@@ -29,15 +30,16 @@ export default observer(({ state, callback }: any) => {
           alignItems: "stretch"
         }}
       >
-        <label
+        <Label
           style={{
             width: "25%",
+            fontSize: '12px',
             display: "flex",
             alignItems: "center"
           }}
         >
           Color
-        </label>
+        </Label>
         <Color
           color={state.value.backgroundColor}
           callback={colorChange}

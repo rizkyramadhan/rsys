@@ -9,15 +9,15 @@ import dynamic from 'next/dynamic';
 import React, { useEffect } from 'react';
 import { DndProvider } from 'react-dnd-cjs';
 import HTML5Backend from 'react-dnd-html5-backend-cjs';
+import { SearchBox, CommandBar } from 'office-ui-fabric-react';
 
 const Grape = dynamic(import('@lib/components/Grape'), {
   ssr: false
 });
 let editor = null;
 const save = async () => {
-  console.log(editor.getHtml());
-  return;
   await api.post('file/save', {
+    path: store.activePage.path,
     content: editor.getHtml()
   });
 };
@@ -63,6 +63,94 @@ const Page = (_props: any) => {
             borderRight: '1px solid rgba(255,255,255,.2)'
           }}
         >
+          <CommandBar
+            className='app-command-bar'
+            overflowItems={[]}
+            items={[
+              {
+                key: 'search',
+                onRender: () => {
+                  return (
+                    <SearchBox
+                      placeholder='Search'
+                      underlined={false}
+                      styles={{
+                        root: {
+                          width: 100,
+                          border: 0,
+                          borderRadius: 0,
+                          minHeight: 43
+                        }
+                      }}
+                    />
+                  );
+                }
+              }
+            ]}
+            farItems={[
+              {
+                key: 'refresh',
+                iconProps: {
+                  style: {
+                    color: 'white'
+                  },
+                  iconName: 'Refresh'
+                },
+                style: {
+                  borderRight: '1px solid rgba(255,255,255,.2)',
+                  borderLeft: '1px solid rgba(255,255,255,.2)'
+                },
+                onClick: () => {
+                  data.dir = [];
+                  loadDir.bind(data)();
+                }
+              },
+              {
+                key: 'newItem',
+                subMenuProps: {
+                  items: [
+                    {
+                      key: 'newFile',
+                      iconProps: {
+                        iconName: 'FileHTML',
+                        style: {
+                          color: 'white'
+                        }
+                      },
+                      name: 'New Component',
+                      onClick: () => {
+                        data.dir.push({
+                          isNew: true,
+                          type: 'file',
+                          name: '.tsx',
+                          relativePath: './.tsx'
+                        });
+                      }
+                    },
+                    {
+                      key: 'newDir',
+                      iconProps: {
+                        iconName: 'Folder',
+                        style: {
+                          color: 'white'
+                        }
+                      },
+                      name: 'New Folder',
+                      onClick: () => {
+                        data.dir.push({
+                          isNew: true,
+                          type: 'dir',
+                          name: '',
+                          children: [],
+                          relativePath: './'
+                        });
+                      }
+                    }
+                  ]
+                }
+              }
+            ]}
+          />
           <DndProvider backend={HTML5Backend}>
             <FileTree
               path='./'

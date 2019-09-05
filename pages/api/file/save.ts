@@ -2,16 +2,26 @@ import fs from 'fs-extra';
 import prettier from 'prettier';
 import $ from 'cheerio';
 import { mapimport } from './mapimport';
+import { project } from '@lib/project';
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
   const p: any = JSON.parse(req.body);
   const json = convert(p.content);
+  let path = p.path;
+  if (path.indexOf('./') === 0) {
+    path = path.substr(2);
+  }
+  const sf = project.getSourceFile(path);
+  sf.removeText();
+  sf.insertText(0, json);
+  sf.saveSync();
+  project.saveSync();
 
   res.end(
     JSON.stringify({
-      json
+      status: 'ok'
     })
   );
 };
@@ -58,6 +68,13 @@ const walk = (json, imprt, isRoot = true) => {
         atkeys.length > 0
           ? atkeys
               .map(key => {
+                if (
+                  key === 'class' &&
+                  typeof item.attribs[key] === 'string' &&
+                  item.attribs[key][0] === 'c'
+                ) {
+                  return '';
+                }
                 return `${formatKey(key)}={${JSON.stringify(
                   item.attribs[key]
                 )}}`;

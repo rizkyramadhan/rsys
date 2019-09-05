@@ -1,7 +1,25 @@
 .ms-Nav-groupContent {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 #grapesjs-react-editor {
-    height: auto !important;
+  height: auto !important;
+}
+.app-command-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.app-command-bar .ms-CommandBar {
+  padding: 0 !important;
+}
+
+.app-command-bar .ms-OverflowSet:first-child .ms-OverflowSet-item:first-child {
+  display: flex;
+  width: 100%;
+}
+
+.app-command-bar
+  .ms-OverflowSet:first-child
+  .ms-OverflowSet-item:first-child
+  .ms-SearchBox {
+  flex: 1;
 }

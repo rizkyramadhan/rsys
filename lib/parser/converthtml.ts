@@ -9,7 +9,7 @@ const walk = tags => {
       const props =
         tag.props.map(prop => {
           if (prop.name && prop.text) {
-            return `${prop.text}="${entities.encode(JSON.stringify(prop.text))}"`;
+            return `${prop.name}="${entities.encode(JSON.stringify(prop.text))}"`;
           }
         }) || [];
       let res = `<${tagname} data-gjs-type="${tagname}" ${props.join(' ')}>`;

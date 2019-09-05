@@ -13,7 +13,8 @@ const components = [
   require("./Statement/ui-ifblock"),
   require("./Statement/ui-elseblock"),
   require("./Statement/ui-switch-statement"),
-  require("./Statement/ui-caseblock")
+  require("./Statement/ui-caseblock"),
+  require("./Statement/ui-loop-statement")
 ];
 
 export default grapesjs.plugins.add(

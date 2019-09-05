@@ -62,10 +62,14 @@ export default function(editor, opt: any = {}) {
       label: "switch-statement",
       category: c.category,
       attributes: { class: "fa fa-gg" },
-      content: { type: "switch-statement-ui", tagName: `switch-statement-ui` },
-      render: ({ model, className }) =>
-        `<div class="${className}__my-wrap"></div><div class="gjs-block-label">${model.get(
-          "label"
-        )}</div>`
+      content: { type: "switch-statement-ui", tagName: `switch-statement-ui` }
+    });
+
+  toAdd("loop-statement") &&
+    bm.add("loop-statement", {
+      label: "loop-statement",
+      category: c.category,
+      attributes: { class: "fa fa-sort-numeric-asc" },
+      content: { type: "loop-statement-ui", tagName: `loop-statement-ui` }
     });
 }

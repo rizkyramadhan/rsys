@@ -10,6 +10,7 @@ import UIIfBlock from "./Statement/ui-ifblock";
 import UIElseBlock from "./Statement/ui-elseblock";
 import UISwitchStatement from "./Statement/ui-switch-statement";
 import UICaseBlock from "./Statement/ui-caseblock";
+import UILoopStatement from "./Statement/ui-loop-statement";
 
 export default {
   UIText,
@@ -23,7 +24,8 @@ export default {
   UIIfBlock,
   UIElseBlock,
   UISwitchStatement,
-  UICaseBlock
+  UICaseBlock,
+  UILoopStatement
 };
 
 export const fontStyle = {

@@ -9,9 +9,11 @@ const components = [
   require("./ui-query"),
   require("./ui-input"),
   require("./ui-code"),
-  require("./Statement/ui-statement"),
+  require("./Statement/ui-if-statement"),
   require("./Statement/ui-ifblock"),
-  require("./Statement/ui-elseblock")
+  require("./Statement/ui-elseblock"),
+  require("./Statement/ui-switch-statement"),
+  require("./Statement/ui-caseblock")
 ];
 
 export default grapesjs.plugins.add(

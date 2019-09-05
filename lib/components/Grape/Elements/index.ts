@@ -5,9 +5,11 @@ import UIQuery from "./ui-query";
 import UISelect from "./ui-select";
 import UIText from "./ui-text";
 import UICode from "./ui-code";
-import UIStatement from "./Statement/ui-statement";
+import UIIfStatement from "./Statement/ui-if-statement";
 import UIIfBlock from "./Statement/ui-ifblock";
 import UIElseBlock from "./Statement/ui-elseblock";
+import UISwitchStatement from "./Statement/ui-switch-statement";
+import UICaseBlock from "./Statement/ui-caseblock";
 
 export default {
   UIText,
@@ -17,9 +19,11 @@ export default {
   UIQuery,
   UIInput,
   UICode,
-  UIStatement,
+  UIIfStatement,
   UIIfBlock,
-  UIElseBlock
+  UIElseBlock,
+  UISwitchStatement,
+  UICaseBlock
 };
 
 export const fontStyle = {

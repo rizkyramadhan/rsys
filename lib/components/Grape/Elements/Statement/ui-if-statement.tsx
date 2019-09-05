@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import { defineElement } from "../util";
 
-const name = "ifblock";
+const name = "if-statement";
 const ReactEl = observer(({ state }: any) => {
   const customStyle: any = {
     display: "flex",
@@ -19,8 +19,7 @@ const ReactEl = observer(({ state }: any) => {
         ...customStyle
       }}
       dangerouslySetInnerHTML={{
-        __html: `<span style="font-size: 12px;color: #292929;">if { ${state
-          .attr.condition || ""} }</span><slot style="width:100%;"/>`
+        __html: `<slot style="width:100%;"/>`
       }}
     />
   );

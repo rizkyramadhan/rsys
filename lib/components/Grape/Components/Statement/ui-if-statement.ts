@@ -2,7 +2,7 @@ export default function(editor, opt: any = {}) {
   const c = opt;
   let dc = editor.DomComponents;
 
-  dc.addType("statement-ui", {
+  dc.addType("if-statement-ui", {
     model: {
       init() {
         this.attributes.components.add({

@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import { defineElement } from "../util";
 
-const name = "statement";
+const name = "switch-statement";
 const ReactEl = observer(({ state }: any) => {
   const customStyle: any = {
     display: "flex",
@@ -12,14 +12,15 @@ const ReactEl = observer(({ state }: any) => {
   };
 
   return (
-    <div
+    <div  
       style={{
         minHeight: 30,
         margin: 10,
         ...customStyle
       }}
       dangerouslySetInnerHTML={{
-        __html: `<slot style="width:100%;"/>`
+        __html: `<span style="font-size: 12px;color: #292929;">switch ( ${state
+          .attr.params || ""} )</span><slot style="width:100%;"/>`
       }}
     />
   );

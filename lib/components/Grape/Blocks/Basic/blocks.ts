@@ -45,14 +45,26 @@ export default function(editor, opt: any = {}) {
       content: { type: "code-ui", tagName: `code-ui` }
     });
 
-  toAdd("statement") &&
-    bm.add("statement", {
+  toAdd("if-statement") &&
+    bm.add("if-statement", {
       label: "if-statement",
       category: c.category,
       attributes: { class: "fa" },
-      content: { type: "statement-ui", tagName: `statement-ui` },
+      content: { type: "if-statement-ui", tagName: `if-statement-ui` },
       render: ({ model, className }) =>
         `<div class="${className}__my-wrap">if</div><div class="gjs-block-label">${model.get(
+          "label"
+        )}</div>`
+    });
+
+  toAdd("switch-statement") &&
+    bm.add("switch-statement", {
+      label: "switch-statement",
+      category: c.category,
+      attributes: { class: "fa fa-gg" },
+      content: { type: "switch-statement-ui", tagName: `switch-statement-ui` },
+      render: ({ model, className }) =>
+        `<div class="${className}__my-wrap"></div><div class="gjs-block-label">${model.get(
           "label"
         )}</div>`
     });

@@ -19,7 +19,7 @@ const ReactEl = observer(({ props }: any) => {
         ...customStyle
       }}
       dangerouslySetInnerHTML={{
-        __html: `<div><span style="font-size: 12px;color: #292929;">else</span><slot style="width:100%;"/></div>`
+        __html: `<span style="font-size: 12px;color: #292929;">else</span><slot style="width:100%;"/>`
       }}
     />
   );

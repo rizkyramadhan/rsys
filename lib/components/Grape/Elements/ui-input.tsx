@@ -8,23 +8,24 @@ const ReactEl = observer(({ state }: any) => {
   const customStyle = {
     ...JSON.parse(state.attr._style || "{}")
   };
+  const attr = JSON.parse(state.attr._attributes || "{}");
   return (
     <div
       style={{
         ...defaultStyle,
         ...customStyle,
-        borderColor: mode.border[state.attr.inputmode]
+        borderColor: mode.border[attr.status || "basic"]
       }}
     >
       <input
         style={{
           ...defaultInputStyle
         }}
-        placeholder={state.attr.inputplaceholder}
-        type={state.attr.inputtype}
-        value={state.attr.inputvalue}
-        disabled={state.attr.inputdisabled}
-        readOnly={state.attr.inputreadonly}
+        placeholder={attr.placeholder}
+        type={attr.type}
+        value={attr.value}
+        disabled={attr.disabled}
+        readOnly={attr}
       />
     </div>
   );
@@ -34,9 +35,8 @@ export default defineElement(name, ReactEl);
 
 const defaultStyle = {
   backgroundColor: "rgb(247, 249, 252)",
-  borderColor: "rgb(237, 241, 247)",
   borderRadius: "4px",
-  border: "1px solid",
+  border: "1px solid rgb(237, 241, 247)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -60,5 +60,6 @@ const defaultInputStyle = {
   borderImage: "initial",
   display: "flex",
   alignItems: "stretch",
-  flexGrow: 1
+  flexGrow: 1,
+  border: 0
 };

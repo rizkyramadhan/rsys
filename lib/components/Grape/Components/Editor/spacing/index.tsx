@@ -9,7 +9,8 @@ const state = observable({
 });
 export default observer((props: any) => {
   const changeInput = (e, key) => {
-    state.value[key] = e.nativeEvent.target.value + "px";
+    state.value[key] = parseInt(e.nativeEvent.target.value);
+    console.log(state.value[key]);
     callback(state.value);
     state.editable = "";
   };
@@ -24,12 +25,13 @@ export default observer((props: any) => {
       const moveX = clientX - original.clientX;
       const moveY = clientY - original.clientY;
       let v = currentVal;
-      if (["marginTop", "paddingBottom"].indexOf(value) > -1) v += moveY * -1;
-      else if (["marginBottom", "paddingTop"].indexOf(value) > -1) v += moveY;
-      else if (["marginLeft", "paddingRight"].indexOf(value) > -1)
+      if (["marginTop", "paddingTop"].indexOf(value) > -1) v += moveY * -1;
+      else if (["marginBottom", "paddingBottom"].indexOf(value) > -1)
+        v += moveY;
+      else if (["marginLeft", "paddingLeft"].indexOf(value) > -1)
         v += moveX * -1;
-      else if (["marginRight", "paddingLeft"].indexOf(value) > -1) v += moveX;
-      state.value[value] = v + "px";
+      else if (["marginRight", "paddingRight"].indexOf(value) > -1) v += moveX;
+      state.value[value] = v;
     };
   };
   const callback = val => {
@@ -43,14 +45,6 @@ export default observer((props: any) => {
 
   useEffect(() => {
     state.value = props.state.value;
-    Object.keys(state.value).forEach(key => {
-      if (
-        !!state.value[key] &&
-        (key.includes("margin") || key.includes("padding"))
-      ) {
-        state.value[key].replace("px", "");
-      }
-    });
   }, [props.state.value]);
   return (
     <div
@@ -484,7 +478,7 @@ export default observer((props: any) => {
                     className="padding-top"
                     mode="delta"
                     fill="currentColor"
-                    cursor="s-resize"
+                    cursor="n-resize"
                     d="
     m1,1
     h143
@@ -498,7 +492,7 @@ export default observer((props: any) => {
                     // delay="0"
                     style={{
                       color: "#3d4654",
-                      cursor: "s-resize"
+                      cursor: "n-resize"
                     }}
                     onMouseDown={({ clientX, clientY }) =>
                       handleMouseDown({ clientX, clientY }, "paddingTop")
@@ -526,7 +520,7 @@ export default observer((props: any) => {
                     // delay="0"
                     style={{
                       color: "#434e5f",
-                      cursor: "w-resize"
+                      cursor: "e-resize"
                     }}
                     onMouseDown={({ clientX, clientY }) =>
                       handleMouseDown({ clientX, clientY }, "paddingRight")
@@ -554,7 +548,7 @@ export default observer((props: any) => {
                     // delay="0"
                     style={{
                       color: "#3d4654",
-                      cursor: "n-resize"
+                      cursor: "s-resize"
                     }}
                     onMouseDown={({ clientX, clientY }) =>
                       handleMouseDown({ clientX, clientY }, "paddingBottom")
@@ -582,7 +576,7 @@ export default observer((props: any) => {
                     // delay="0"
                     style={{
                       color: "#434e5f",
-                      cursor: "e-resize"
+                      cursor: "w-resize"
                     }}
                     onMouseDown={({ clientX, clientY }) =>
                       handleMouseDown({ clientX, clientY }, "paddingLeft")

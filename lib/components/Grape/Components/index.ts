@@ -17,12 +17,20 @@ const components = [
   require("./Statement/ui-loop-statement")
 ];
 
+export const sortingTraits = (a, b) => {
+  let aT = a.at || 10;
+  let bT = b.at || 10;
+  if (aT < bT) return -1;
+  if (aT > bT) return 1;
+  return 0;
+};
+
 export default grapesjs.plugins.add(
   "gjs-custom-plugin",
   (editor, opts = {}) => {
     const config = {
-      styleTraits: styleTraits,
-      styleManager: styleManager,
+      traits: traits,
+      traitsManager: traitsManager,
       ...opts
     };
 
@@ -32,9 +40,9 @@ export default grapesjs.plugins.add(
     });
 
     // Default Style
-    styleTraits.forEach(trait => {
-      editor.TraitManager.addType(trait.type, {
-        ...styleManager[trait.type]
+    Object.keys(traitsManager).forEach(type => {
+      editor.TraitManager.addType(type, {
+        ...traitsManager[type]
       });
     });
 
@@ -49,15 +57,34 @@ export default grapesjs.plugins.add(
   }
 );
 
-const styleTraits = [
+const traits = [
   {
-    label: "Layout",
-    name: "layout",
+    name: "global",
     type: "layoutStyle"
   }
 ];
 
-const styleManager = {
+const traitsManager = {
+  attributes: {
+    noLabel: true,
+    templateInput: "",
+    createInput: ({ trait, component }) => {
+      let value = JSON.parse(component.getAttributes()._attributes || "{}");
+      const callback = newVal => {
+        component.addAttributes({
+          _attributes: JSON.stringify(newVal)
+        });
+      };
+      return EditorDom(
+        trait.attributes.name,
+        {
+          value,
+          type: component.attributes.type
+        },
+        callback
+      );
+    }
+  },
   layoutStyle: {
     noLabel: true,
     templateInput: "",
@@ -68,7 +95,13 @@ const styleManager = {
           _style: JSON.stringify(newVal)
         });
       };
-      return EditorDom("global", value, callback);
+      return EditorDom(
+        trait.attributes.name,
+        {
+          value
+        },
+        callback
+      );
     }
   }
 };

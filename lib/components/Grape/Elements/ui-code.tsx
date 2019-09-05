@@ -5,6 +5,7 @@ import { fontStyle, mode } from ".";
 
 const name = "code";
 const ReactEl = observer(({ state }: any) => {
+  const attr = JSON.parse(state.attr._attributes || "{}");
   return (
     <div
       style={{

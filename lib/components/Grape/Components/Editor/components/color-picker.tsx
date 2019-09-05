@@ -6,6 +6,7 @@ import {
   TextField
 } from "office-ui-fabric-react";
 import React, { useEffect } from "react";
+import { inputStyle } from "..";
 
 export default observer(({ color, callback, config, keyid }: any) => {
   const change = e => {
@@ -80,20 +81,6 @@ export default observer(({ color, callback, config, keyid }: any) => {
     </div>
   );
 });
-
-const inputStyle: any = {
-  fieldGroup: {
-    backgroundColor: "#2b313b",
-    border: 0,
-    height: "22px"
-  },
-  field: {
-    height: "21px"
-  },
-  root: {
-    width: "100%"
-  }
-};
 
 const btnStyles = {
   root: {

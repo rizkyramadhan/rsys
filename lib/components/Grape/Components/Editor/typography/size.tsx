@@ -1,6 +1,6 @@
-import { observer } from 'mobx-react-lite';
-import { TextField, Label } from 'office-ui-fabric-react';
-import React from 'react';
+import { observer } from "mobx-react-lite";
+import { TextField, Label } from "office-ui-fabric-react";
+import React from "react";
 
 export default observer(({ state, callback }: any) => {
   const change = (e, key) => {
@@ -10,18 +10,18 @@ export default observer(({ state, callback }: any) => {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'row',
-        margin: '0 10px 5px',
-        alignItems: 'stretch'
+        display: "flex",
+        flexDirection: "row",
+        margin: "0 10px 5px",
+        alignItems: "stretch"
       }}
     >
       <Label
         style={{
-          width: '25%',
-          fontSize: '12px',
-          display: 'flex',
-          alignItems: 'center',
+          width: "25%",
+          fontSize: "12px",
+          display: "flex",
+          alignItems: "center"
         }}
       >
         Size
@@ -29,24 +29,24 @@ export default observer(({ state, callback }: any) => {
 
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          width: '100%',
-          alignItems: 'stretch'
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          alignItems: "stretch"
         }}
       >
         <TextField
           styles={inputStyle}
           value={state.value.width}
-          onChange={e => change(e, 'fontSize')}
+          onChange={e => change(e, "fontSize")}
         />
         <Label
           style={{
-            width: '50%',
-            fontSize: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            margin: '0 10px 0 10px'
+            width: "50%",
+            fontSize: "12px",
+            display: "flex",
+            alignItems: "center",
+            margin: "0 10px 0 10px"
           }}
         >
           Height
@@ -54,7 +54,7 @@ export default observer(({ state, callback }: any) => {
         <TextField
           styles={inputStyle}
           value={state.value.height}
-          onChange={e => change(e, 'lineHeight')}
+          onChange={e => change(e, "lineHeight")}
         />
       </div>
     </div>
@@ -63,11 +63,11 @@ export default observer(({ state, callback }: any) => {
 
 const inputStyle: any = {
   fieldGroup: {
-    backgroundColor: '#2b313b',
+    backgroundColor: "#2b313b",
     border: 0,
-    height: '22px'
+    height: "22px"
   },
   field: {
-    height: '21px'
+    height: "21px"
   }
 };

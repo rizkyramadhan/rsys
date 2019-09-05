@@ -1,44 +1,92 @@
 import { observer } from "mobx-react-lite";
-import { Modal, TextField } from "office-ui-fabric-react";
+import { Modal, TextField, Label, IconButton } from "office-ui-fabric-react";
 import { useEffect, useRef } from "react";
 import CodeMirror from "react-codemirror";
-import { textMultiline } from "..";
+import { observable } from "mobx";
 require("codemirror/mode/jsx/jsx");
 
-export default observer(({ value, callback, config }: any) => {
+export default observer((props: any) => {
   const ref = useRef(null as any);
   const change = e => {
-    value = e.nativeEvent.target.value;
-    callback(value);
+    props.state.value = e.nativeEvent.target.value;
+    props.state.callback(props.state.value);
   };
   const codeChange = v => {
-    value = v;
-    callback(value);
+    props.state.value = v;
+    props.state.callback(props.state.value);
   };
   useEffect(() => {
-    config.keyid +=
-      "modal-" + Math.floor(100000000 + Math.random() * 900000000);
-  }, []);
+    props.state.keyid =
+      props.state.keyid +
+      "modal-" +
+      Math.floor(100000000 + Math.random() * 900000000);
+  }, [props]);
 
   return (
     <div
       style={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
+        margin: "0 10px 5px",
         alignItems: "stretch"
       }}
     >
-      <TextField
-        multiline
-        rows={4}
-        styles={textMultiline}
-        onChange={change}
-        value={value}
-      />
+      <div
+        style={{
+          width: "25%",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "stretch",
+          justifyContent: "space-between"
+        }}
+      >
+        <Label
+          style={{
+            fontSize: "12px",
+            display: "flex"
+          }}
+        >
+          {props.state.label}
+        </Label>
+      </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "stretch",
+          justifyContent: "space-between",
+          position: "relative"
+        }}
+      >
+        <TextField
+          multiline
+          rows={props.state.rowspan}
+          styles={textMultiline}
+          onChange={change}
+          value={props.state.value}
+        />
+        <IconButton
+          iconProps={{
+            iconName: "MiniExpand"
+          }}
+          title="Expand"
+          ariaLabel="Expand"
+          onClick={() => (props.state.showModal = true)}
+          styles={{
+            root: {
+              position: "absolute",
+              top: 0,
+              right: 0,
+              background: "#373d49"
+            }
+          }}
+        />
+      </div>
       <Modal
-        titleAriaId={config.key}
-        isOpen={config.showModal}
-        onDismiss={() => (config.showModal = false)}
+        titleAriaId={props.state.keyid}
+        isOpen={props.state.showModal}
+        onDismiss={() => (props.state.showModal = false)}
         isBlocking={false}
         styles={{
           main: {
@@ -67,7 +115,7 @@ export default observer(({ value, callback, config }: any) => {
               backgroundColor: "#373d49"
             }}
           >
-            Code
+            {props.state.label}
           </label>
           <div
             style={{
@@ -79,7 +127,7 @@ export default observer(({ value, callback, config }: any) => {
             }}
           >
             <CodeMirror
-              value={value}
+              value={props.state.value}
               onChange={codeChange}
               ref={ref}
               options={{
@@ -101,14 +149,18 @@ export default observer(({ value, callback, config }: any) => {
   );
 });
 
-export const textMultilineModal = {
+const textMultiline = {
   label: {
     fontWeight: 400
   },
   fieldGroup: {
-    backgroundColor: "#313742",
-    border: "0",
-    minWidth: "600px",
-    minHeight: "600px"
+    backgroundColor: "#2b313b",
+    border: "0"
+  },
+  field: {
+    paddingRight: "32px"
+  },
+  root: {
+    width: "100%"
   }
 };

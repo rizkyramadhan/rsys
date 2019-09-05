@@ -8,11 +8,12 @@ const ReactEl = observer(({ state }: any) => {
   const customStyle = {
     ...JSON.parse(state.attr._style || "{}")
   };
+  const attr = JSON.parse(state.attr._attributes || "{}");
   return (
     <div
       style={{
         ...defaultStyle,
-        backgroundColor: mode.background[state.attr.status],
+        backgroundColor: mode.background[attr.status || "primary"],
         ...customStyle
       }}
     >
@@ -20,11 +21,11 @@ const ReactEl = observer(({ state }: any) => {
         style={{
           ...defaultLabel,
           ...fontStyle,
-          color: state.attr.status == "basic" ? "#313742" : "#F7F9FC",
-          ...size[state.attr.buttonsize]
+          color: attr.status == "basic" ? "#313742" : "#F7F9FC",
+          ...size[attr.size || "medium"]
         }}
       >
-        {state.attr.textlabel || "Button"}
+        {attr.text || "Button"}
       </div>
     </div>
   );

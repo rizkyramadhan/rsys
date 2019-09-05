@@ -15,7 +15,7 @@ const ReactEl = observer(({ state }: any) => {
         color: mode.text[state.attr.textmode]
       })
   };
-
+  const attr = JSON.parse(state.attr._attributes || "{}");
   return (
     <>
       {!state.attr.text ? (
@@ -37,7 +37,7 @@ const ReactEl = observer(({ state }: any) => {
             ...customTextStyle
           }}
         >
-          {state.attr.text}
+          {attr.text}
         </div>
       )}
     </>

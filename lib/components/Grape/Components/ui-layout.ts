@@ -5,7 +5,7 @@ export default function(editor, opt: any = {}) {
   dc.addType("layout-ui", {
     model: {
       defaults: {
-        traits: [...c.styleTraits]
+        traits: [...c.traits]
       }
     }
   });

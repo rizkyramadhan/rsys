@@ -1,41 +1,27 @@
 import EditorDom from "./Editor/index";
+import { sortingTraits } from ".";
 
 export default function(editor, opt: any = {}) {
   const c = opt;
   let dc = editor.DomComponents;
   let dt = editor.TraitManager;
+  let traits = [
+    {
+      name: "attributes",
+      type: "attributes"
+    },
+    {
+      name: "typography",
+      type: "typography"
+    },
+    ...c.traits
+  ].sort(sortingTraits);
 
   dc.addType("text-ui", {
     model: {
       defaults: {
         dropable: false,
-        traits: [
-          {
-            label: "Text",
-            name: "text",
-            placeholder: "<empty>"
-          },
-          {
-            type: "select",
-            label: "Mode",
-            name: "textmode",
-            options: [
-              { id: "none", name: "None" },
-              { id: "primary", name: "Primary" },
-              { id: "success", name: "Success" },
-              { id: "info", name: "Info" },
-              { id: "warning", name: "Warning" },
-              { id: "danger", name: "Danger" }
-            ],
-            value: ""
-          },
-          {
-            label: "typography",
-            name: "textstyle",
-            type: "typography"
-          },
-          ...c.styleTraits
-        ]
+        traits: traits
       }
     }
   });
@@ -50,7 +36,13 @@ export default function(editor, opt: any = {}) {
           _style: JSON.stringify(newVal)
         });
       };
-      return EditorDom("typography", value, callback);
+      return EditorDom(
+        trait.attributes.name,
+        {
+          value
+        },
+        callback
+      );
     }
   });
 }

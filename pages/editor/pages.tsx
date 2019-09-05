@@ -88,7 +88,6 @@ const Page = (_props: any) => {
                           width: 100,
                           border: 0,
                           borderRadius: 0,
-                          minHeight: 43
                         }
                       }}
                     />
@@ -117,6 +116,7 @@ const Page = (_props: any) => {
               {
                 key: 'newItem',
                 subMenuProps: {
+                  className:'app-command-bar-menu',
                   items: [
                     {
                       key: 'newFile',

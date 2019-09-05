@@ -8,8 +8,28 @@
 .app-command-bar {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
+.app-command-bar .ms-Button,
+.app-command-bar .ms-SearchBox {
+  height: 39px;
+}
+
 .app-command-bar .ms-CommandBar {
   padding: 0 !important;
+  height: 39px;
+}
+
+.app-command-bar-menu {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0 !important;
+}
+
+.gjs-pn-views {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  height: 39px;
+}
+
+.gjs-pn-views .gjs-pn-buttons {
+  display: flex;
 }
 
 .file-tree-space:hover {

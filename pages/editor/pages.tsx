@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import { DndProvider } from 'react-dnd-cjs';
 import HTML5Backend from 'react-dnd-html5-backend-cjs';
 import { SearchBox, CommandBar } from 'office-ui-fabric-react';
+import { fuzzyMatch } from '@lib/parser/fuzzymatch';
 
 const Grape = dynamic(import('@lib/components/Grape'), {
   ssr: false
@@ -25,6 +26,8 @@ const Page = (_props: any) => {
   const data = useObservable({
     project: '',
     dir: [] as any[],
+    dirsearch: [] as any[],
+    search: '',
     selected: './HomeScreen.tsx',
     draghovered: '',
     contextmenu: '',
@@ -60,6 +63,8 @@ const Page = (_props: any) => {
         <div
           style={{
             flexBasis: 250,
+            flexDirection: 'column',
+            display: 'flex',
             borderRight: '1px solid rgba(255,255,255,.2)'
           }}
         >
@@ -74,6 +79,10 @@ const Page = (_props: any) => {
                     <SearchBox
                       placeholder='Search'
                       underlined={false}
+                      onChanged={val => {
+                        data.search = val;
+                        data.dirsearch = search(data.dir, data.search);
+                      }}
                       styles={{
                         root: {
                           width: 100,
@@ -187,10 +196,10 @@ const Page = (_props: any) => {
                       data.selected = from.path + from.file.name;
                     });
                   }
-                  // Api.move(
-                  //   from.file.relativePath,
-                  //   from.path + '/' + from.file.name
-                  // );
+                  api.get(
+                    `file/move?old=${from.file.relativePath}&new=${from.path +
+                      from.file.name}`
+                  );
                   from.file.relativePath = from.path + from.file.name;
                   to.children.push(from.file);
                   from.parent.splice(from.index, 1);
@@ -200,12 +209,14 @@ const Page = (_props: any) => {
               draghovered={data.draghovered}
               selected={data.selected}
               level={0}
-              dir={data.dir}
+              dir={data.search.length === 0 ? data.dir : data.dirsearch}
             />
             <RootDrop
               onDrop={(from: any) => {
                 if (data.dir.indexOf(from.file) < 0) {
-                  // Api.move(from.file.relativePath, './' + from.file.name);
+                  api.get(
+                    `file/move?old=${from.file.relativePath}&new=./${from.file.name}`
+                  );
                   data.draghovered = '';
                   from.file.relativePath = './' + from.file.name;
                   from.parent.splice(from.index, 1);
@@ -288,4 +299,22 @@ const expandDir: any = function(this: any) {
   if (data.selected) {
     recurseExpandFind(data.dir, data.selected);
   }
+};
+
+const search = function(dir: any[], text: string) {
+  const mainResult = [];
+  dir.map((item: any) => {
+    if (fuzzyMatch(text, item.name)) {
+      mainResult.push({ ...item, children: [] });
+    }
+
+    if (item.children) {
+      const subResult = search(item.children, text);
+      subResult.map((ic: any) => {
+        mainResult.push({ ...ic, children: [] });
+      });
+    }
+  });
+
+  return mainResult;
 };

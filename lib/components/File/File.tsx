@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd-cjs';
 import ContextMenu from './ContextMenu';
 import FileTree from './FileTree';
+import api from '@lib/api';
 
 export interface FileTreeDragItem {
   index: number;
@@ -162,6 +163,7 @@ export default observer(
           {state.edit ? (
             <TextField
               value={name}
+              spellCheck={false}
               styles={{
                 field: {
                   border: 0,
@@ -322,14 +324,17 @@ const applyRename = (
       delete file.isNew;
 
       if (file.type === 'file') {
-        // Api.newFile(file.relativePath);
-
+        api.get(`file/newfile?path=${file.relativePath}`);
         onSelect(file);
       } else {
-        // Api.newDir(file.relativePath);
+        api.get(`file/newdir?path=${file.relativePath}`);
       }
     } else {
-      //   Api.move(dirPath + '/' + file.originalName, dirPath + '/' + file.name);
+      api.get(
+        `file/move?old=${dirPath + '/' + file.originalName}&new=${dirPath +
+          '/' +
+          file.name}`
+      );
     }
     if (dirPath + '/' + file.originalName === selected) {
       onSelect(file);

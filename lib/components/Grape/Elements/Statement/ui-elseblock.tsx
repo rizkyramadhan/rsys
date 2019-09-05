@@ -3,7 +3,7 @@ import React from "react";
 import { defineElement } from "../util";
 
 const name = "elseblock";
-const ReactEl = observer(({ props }: any) => {
+const ReactEl = observer(({ state }: any) => {
   const customStyle: any = {
     display: "flex",
     flexDirection: "column",

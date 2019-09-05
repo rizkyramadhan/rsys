@@ -9,6 +9,8 @@ const ReactEl = observer(({ state }: any) => {
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "flex-start",
+    minHeight: 30,
+    margin: 10,
     ...JSON.parse(state.attr._style || "{}")
   };
   const styleString = Object.entries(customStyle).reduce(
@@ -26,9 +28,11 @@ const ReactEl = observer(({ state }: any) => {
   return (
     <div
       style={{
-        minHeight: 30,
-        margin: 10,
-        ...customStyle
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        minHeight: 30
       }}
       dangerouslySetInnerHTML={{
         __html: `<slot style="width:100%;${styleString}"/>`

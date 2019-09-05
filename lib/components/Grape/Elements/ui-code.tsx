@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
+import { fontStyle } from ".";
 import { defineElement } from "./util";
-import { fontStyle, mode } from ".";
 
 const name = "code";
 const ReactEl = observer(({ state }: any) => {
@@ -15,7 +15,7 @@ const ReactEl = observer(({ state }: any) => {
         backgroundColor: "#FBAA00"
       }}
     >
-      {"<code>"}
+      {`<code ${(attr.props || "").slice(0, 30)}>`}
     </div>
   );
 });

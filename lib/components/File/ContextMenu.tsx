@@ -1,6 +1,7 @@
 import { Callout, DirectionalHint, Nav } from 'office-ui-fabric-react';
 import React from 'react';
 import { lightTheme } from '@lib/theme';
+import api from '@lib/api';
 
 // create your menu first
 export default ({
@@ -103,7 +104,7 @@ export default ({
                         setTimeout(() => {
                           if (window.confirm('Are you sure ?')) {
                             onDelete(file);
-                            // Api.del(file.relativePath);
+                            api.get(`file/del?path=${file.relativePath}`);
                           }
                         });
                       }
@@ -140,7 +141,7 @@ export default ({
                         setTimeout(() => {
                           if (window.confirm('Are you sure ?')) {
                             onDelete(file);
-                            // Api.del(file.relativePath);
+                            api.get(`file/del?path=${file.relativePath}`);
                           }
                         });
                       }

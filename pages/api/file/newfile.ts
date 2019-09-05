@@ -1,19 +1,19 @@
 import fs from 'fs-extra';
-import { absPath, project } from '@lib/project';
+import { absPath, project, relativePath } from '@lib/project';
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
 
-  const path = req.body.path.replace('./', absPath + '/');
+  const path = req.query.path.replace('./', absPath + '/' + relativePath + '/');
   const sf = project.createSourceFile(
     path,
     `
   import React from "react";
-  import { View } from "react-native";
+  import { Layout } from "react-native-ui-kit";
   
   export default () => {
-    return (<View/>);
+    return (<Layout/>);
   };
   `
   );
@@ -26,3 +26,4 @@ export default (req, res) => {
     })
   );
 };
+ 

@@ -12,6 +12,10 @@
   padding: 0 !important;
 }
 
+.file-tree-space:hover {
+  background: #818894;
+}
+
 .app-command-bar .ms-OverflowSet:first-child .ms-OverflowSet-item:first-child {
   display: flex;
   width: 100%;

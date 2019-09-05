@@ -8,7 +8,10 @@ const components = [
   require("./ui-select"),
   require("./ui-query"),
   require("./ui-input"),
-  require("./ui-code")
+  require("./ui-code"),
+  require("./Statement/ui-statement"),
+  require("./Statement/ui-ifblock"),
+  require("./Statement/ui-elseblock")
 ];
 
 export default grapesjs.plugins.add(

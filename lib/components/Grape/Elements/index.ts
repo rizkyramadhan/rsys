@@ -5,6 +5,9 @@ import UIQuery from "./ui-query";
 import UISelect from "./ui-select";
 import UIText from "./ui-text";
 import UICode from "./ui-code";
+import UIStatement from "./Statement/ui-statement";
+import UIIfBlock from "./Statement/ui-ifblock";
+import UIElseBlock from "./Statement/ui-elseblock";
 
 export default {
   UIText,
@@ -13,7 +16,10 @@ export default {
   UIButton,
   UIQuery,
   UIInput,
-  UICode
+  UICode,
+  UIStatement,
+  UIIfBlock,
+  UIElseBlock
 };
 
 export const fontStyle = {

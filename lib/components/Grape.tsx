@@ -118,7 +118,7 @@ export default forwardRef(
 
     return (
       <>
-        <div id={id} style={{ flex: 1, opacity: ready ? 1 : 0 }}>
+        <div id={id} style={{ flex: 1, display: ready ? 'block' : 'none' }}>
           <Head>
             <link rel='stylesheet' href='/static/grapesjs/css/grapes.min.css' />
             <link rel='stylesheet' href='/static/codemirror/codemirror.css' />

@@ -21,7 +21,7 @@ const Page = (props: any) => {
     const fetch = async () => {
       const res = await api.get('file/isready');
       if (res.ready) {
-        Router.replace('/editor/pages');
+        Router.replace('/editor');
       }
       setTimeout(() => {
         state.ready = true;
@@ -35,7 +35,7 @@ const Page = (props: any) => {
       const res = await api.get(`file/setup?name=${state.name}`);
       state.loading = false;
       if (res.success) {
-        router.replace('/editor/pages');
+        router.replace('/editor');
       } else {
         alert(res.reason);
       }

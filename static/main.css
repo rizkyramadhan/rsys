@@ -51,6 +51,10 @@
 .gjs-trt-trait .ms-Button {
   height: 26px !important;
 }
+.rsys-attr {
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
 .rsys-attr .ms-Button .ms-Icon,
 .rsys-attr .ms-Button .ms-Icon svg {
   font-size: 14px !important;

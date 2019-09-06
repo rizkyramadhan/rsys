@@ -33,7 +33,7 @@ const Header: React.FunctionComponent<IHeader> = () => {
           itemKey=''
           onRenderItemLink={() => null}
         ></PivotItem>
-        <PivotItem headerText='Pages' itemKey='/editor/pages'></PivotItem>
+        <PivotItem headerText='Pages' itemKey='/editor'></PivotItem>
         <PivotItem headerText='API' itemKey='/editor/api'></PivotItem>
         <PivotItem headerText='Config' itemKey='/editor/config'></PivotItem>
         <PivotItem headerText='Deploy' itemKey='/editor/deploy'></PivotItem>

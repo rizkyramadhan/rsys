@@ -10,14 +10,21 @@ export default (req, res) => {
     return;
   }
 
-  if (project.ts === null) {
-    loadProject();
-  }
-
   let p = req.query.path;
   if (p.indexOf('./') === 0) {
     p = p.substr(2);
   }
-  const sf = project.ts.getSourceFile(p);
-  res.end(JSON.stringify(mDefault(sf)));
+  
+  try {
+    const sf = project.ts.getSourceFile(p);
+    res.end(JSON.stringify(mDefault(sf)));
+  } catch (e) {
+    if (project.ts === null) {
+      loadProject();
+    }
+    setTimeout(() => {
+      const sf = project.ts.getSourceFile(p);
+      res.end(JSON.stringify(mDefault(sf)));
+    }, 2000);
+  }
 };

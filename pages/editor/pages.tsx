@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import React, { useEffect } from 'react';
 import { DndProvider } from 'react-dnd-cjs';
 import HTML5Backend from 'react-dnd-html5-backend-cjs';
-import { SearchBox, CommandBar } from 'office-ui-fabric-react';
+import { SearchBox, CommandBar, Label } from 'office-ui-fabric-react';
 import { fuzzyMatch } from '@lib/parser/fuzzymatch';
 
 const Grape = dynamic(import('@lib/components/Grape'), {
@@ -28,7 +28,7 @@ const Page = (_props: any) => {
     dir: [] as any[],
     dirsearch: [] as any[],
     search: '',
-    selected: './HomeScreen.tsx',
+    selected: '',
     draghovered: '',
     contextmenu: '',
     loading: true
@@ -52,8 +52,8 @@ const Page = (_props: any) => {
 
   const readFile = async () => {
     const res = await api.get(`file/read?path=${data.selected}`);
-    // store.activePage.path = data.selected;
-    // store.activePage.content = res;
+    store.activePage.path = data.selected;
+    store.activePage.content = res;
     return res;
   };
 
@@ -87,7 +87,7 @@ const Page = (_props: any) => {
                         root: {
                           width: 100,
                           border: 0,
-                          borderRadius: 0,
+                          borderRadius: 0
                         }
                       }}
                     />
@@ -116,7 +116,7 @@ const Page = (_props: any) => {
               {
                 key: 'newItem',
                 subMenuProps: {
-                  className:'app-command-bar-menu',
+                  className: 'app-command-bar-menu',
                   items: [
                     {
                       key: 'newFile',
@@ -170,7 +170,7 @@ const Page = (_props: any) => {
               onSelect={(file: any) => {
                 if (file.type === 'file') {
                   data.selected = file.relativePath;
-                  data.selected;
+                  readFile();
                 }
               }}
               onDragHover={(from: any, to: any) => {
@@ -229,16 +229,29 @@ const Page = (_props: any) => {
         <div
           style={{
             flex: 1,
-            display: 'flex'
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
         >
-          <Grape
-            content={store.activePage.content}
-            setupEditor={e => {
-              editor = e;
-            }}
-            save={saveKey}
-          />
+          {data.selected ? (
+            <Grape
+              content={store.activePage.content}
+              setupEditor={e => {
+                editor = e;
+              }}
+              save={saveKey}
+            />
+          ) : (
+            <>
+              <img
+                src={'/static/img/empty-bg.png'}
+                style={{ width: '150px' }}
+              />
+              <Label>Please select a page</Label>
+            </>
+          )}
         </div>
       </div>
     </Container>

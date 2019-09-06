@@ -47,3 +47,13 @@
   .ms-SearchBox {
   flex: 1;
 }
+
+.gjs-field-wrp--attributes .ms-Label {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-right: 5px !important;
+}
+
+.ms-Dropdown-title {
+  font-size: 12px !important;
+}

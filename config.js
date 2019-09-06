@@ -1,7 +1,13 @@
 const convict = require('convict');
 const fs = require('fs');
+const jetpack = require('fs-jetpack');
 
 const config = convict({
+  app: {
+    doc: 'Current App Name',
+    format: String,
+    default: ''
+  },
   env: {
     doc: 'The application environment.',
     format: ['production', 'development'],
@@ -26,12 +32,12 @@ const config = convict({
     format: Object,
     default: {
       default: {
-        driver: "mysql",
-        host: "localhost",
+        driver: 'mysql',
+        host: 'localhost',
         port: 80,
-        database: "rsys",
-        username: "root",
-        password: "okedeh"
+        database: 'rsys',
+        username: 'root',
+        password: 'okedeh'
       }
     },
     env: 'DB_HOST'
@@ -39,14 +45,21 @@ const config = convict({
 });
 
 // Load environment dependent configuration
-var env = config.get('env');
 
 // write config file if does not exist, if exist load it
-fs.writeFile('./rsys.config.json', config.toString(), {}, function(err) {
-  if (err && err.code === 'EEXIST') {
-    config.loadFile('./rsys.config.json');
-  }
-});
+config.save = () => {
+  fs.writeFile('./rsys.config.json', config.toString(), {}, function(err) {
+    if (err && err.code === 'EEXIST') {
+      config.loadFile('./rsys.config.json');
+    }
+  });
+};
+
+if (!jetpack.exists('./rsys.config.json')) {
+  config.save();
+} else {
+  config.loadFile('./rsys.config.json');
+}
 
 // Perform validation
 config.validate({ allowed: 'strict' });

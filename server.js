@@ -2,11 +2,10 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 const fs = require('fs');
-
+const jetpack = require('fs-jetpack');
 const dev = !!process.env.npm_package_scripts_dev;
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
 
 console.log(`
 Starting
@@ -24,6 +23,12 @@ fs.access(__dirname, fs.constants.W_OK, function(err) {
     process.exit(1);
   }
 });
+
+if (jetpack.exists(`./app/node_modules`)) {
+  console.log('Cleaning...');
+  jetpack.remove(`./app`);
+  fs.mkdirSync('./app');
+}
 
 app.prepare().then(() => {
   createServer((req, res) =>

@@ -1,4 +1,4 @@
-import { project } from '@lib/project';
+import project, { loadProject } from '@lib/project';
 import { mDefault } from '@lib/parser/utility';
 
 export default (req, res) => {
@@ -10,10 +10,14 @@ export default (req, res) => {
     return;
   }
 
+  if (project.ts === null) {
+    loadProject();
+  }
+
   let p = req.query.path;
   if (p.indexOf('./') === 0) {
     p = p.substr(2);
   }
-  const sf = project.getSourceFile(p);
+  const sf = project.ts.getSourceFile(p);
   res.end(JSON.stringify(mDefault(sf)));
 };

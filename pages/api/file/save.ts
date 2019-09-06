@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import prettier from 'prettier';
 import $ from 'cheerio';
 import { mapimport } from './mapimport';
-import { project } from '@lib/project';
+import project from '@lib/project';
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -13,11 +13,11 @@ export default (req, res) => {
   if (path.indexOf('./') === 0) {
     path = path.substr(2);
   }
-  const sf = project.getSourceFile(path);
+  const sf = project.ts.getSourceFile(path);
   sf.removeText();
   sf.insertText(0, json);
   sf.saveSync();
-  project.saveSync();
+  project.ts.saveSync();
 
   res.end(
     JSON.stringify({

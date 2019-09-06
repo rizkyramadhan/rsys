@@ -1,23 +1,29 @@
-import { absPath, project, relativePath } from '@lib/project';
+import project from '@lib/project';
 import fs from 'fs';
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
-  const from = req.query.old.replace('./', absPath + '/' + relativePath + '/');
-  const to = req.query.new.replace('./', absPath + '/' + relativePath + '/');
+  const from = req.query.old.replace(
+    './',
+    project.absPath + '/' + project.relativePath + '/'
+  );
+  const to = req.query.new.replace(
+    './',
+    project.absPath + '/' + project.relativePath + '/'
+  );
   if (fs.lstatSync(from).isDirectory()) {
-    const sf = project.getDirectory(from);
+    const sf = project.ts.getDirectory(from);
     if (sf) {
       sf.moveImmediatelySync(to);
-      project.saveSync();
+      project.ts.saveSync();
       res.send({ status: 'ok' });
     }
   } else {
-    const sf = project.getSourceFile(from);
+    const sf = project.ts.getSourceFile(from);
     if (sf) {
       sf.moveImmediatelySync(to);
-      project.saveSync();
+      project.ts.saveSync();
       res.send({ status: 'ok' });
     }
   }

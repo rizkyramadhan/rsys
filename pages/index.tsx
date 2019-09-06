@@ -15,7 +15,7 @@ const Page = (props: any) => {
   const state = useObservable({
     name: '',
     loading: false,
-    ready: null
+    ready: false
   });
   useEffect(() => {
     const fetch = async () => {
@@ -23,11 +23,26 @@ const Page = (props: any) => {
       if (res.ready) {
         Router.replace('/editor/pages');
       }
+      setTimeout(() => {
+        state.ready = true;
+      }, 1500);
     };
     fetch();
   }, []);
+  const submit = async () => {
+    if (state.name) {
+      state.loading = true;
+      const res = await api.get(`file/setup?name=${state.name}`);
+      state.loading = false;
+      if (res.success) {
+        router.replace('/editor/pages');
+      } else {
+        alert(res.reason);
+      }
+    }
+  };
 
-  if (state.ready || state.ready === null) return null;
+  if (!state.ready) return null;
   return (
     <div
       style={{
@@ -63,21 +78,16 @@ const Page = (props: any) => {
             value={state.name}
             theme={theme}
             styles={{ root: { width: 200 } }}
+            onKeyDown={(e: any) => {
+              if (e.keyCode == 13) {
+                submit();
+              }
+            }}
             onChange={(e: any) => {
               state.name = e.target.value.replace(/\W/g, '');
             }}
           ></TextField>
-          <PrimaryButton
-            theme={theme}
-            onClick={async () => {
-              if (state.name) {
-                state.loading = true;
-                await api.get(`file/setup?name=${state.name}`);
-                router.replace('/editor/pages');
-              }
-            }}
-            style={{ margin: 10 }}
-          >
+          <PrimaryButton theme={theme} onClick={submit} style={{ margin: 10 }}>
             Create
           </PrimaryButton>
         </div>

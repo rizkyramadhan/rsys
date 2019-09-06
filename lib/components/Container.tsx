@@ -7,6 +7,7 @@ import store from '@lib/store';
 import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
 import { initializeIcons } from '@uifabric/icons';
+import { loadProject } from '@lib/project';
 initializeIcons(undefined, { disableWarnings: true });
 
 const Header = dynamic(import('./Header'), {
@@ -20,7 +21,7 @@ export default observer(({ children }: any) => {
         store.ready = res.ready;
         if (!res.ready) {
           router.replace('/');
-        }
+        } 
       });
     }
   }, []);

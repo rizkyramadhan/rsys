@@ -1,12 +1,15 @@
 import fs from 'fs-extra';
-import { absPath, project, relativePath } from '@lib/project';
+import project from '@lib/project';
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
 
-  const path = req.query.path.replace('./', absPath + '/' + relativePath + '/');
-  const sf = project.createSourceFile(
+  const path = req.query.path.replace(
+    './',
+    project.absPath + '/' + project.relativePath + '/'
+  );
+  const sf = project.ts.createSourceFile(
     path,
     `
   import React from "react";
@@ -18,7 +21,7 @@ export default (req, res) => {
   `
   );
   sf.saveSync();
-  project.saveSync();
+  project.ts.saveSync();
 
   res.end(
     JSON.stringify({
@@ -26,4 +29,3 @@ export default (req, res) => {
     })
   );
 };
- 

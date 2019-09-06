@@ -2,17 +2,21 @@ import fs from 'fs-extra';
 import * as path from 'path';
 import execa from 'execa';
 import cexists from 'command-exists';
+import config from '../../../config';
+import { loadProject } from '@lib/project';
 
 export default async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
 
-  if (!fs.existsSync('./app')) {
+  const name = req.query.name;
+  if (!fs.existsSync(`./app/${name}`)) {
     fs.removeSync('./templates/app/node_modules');
-    fs.copySync('./templates/app', 'app');
+    fs.mkdirSync(`app/${name}`);
+    fs.copySync('./templates/app', `app/${name}`);
   }
 
-  if (!fs.existsSync('./app/node_modules')) {
+  if (!fs.existsSync(`./app/${name}/node_modules`)) {
     if (!(await cexists('yarn'))) {
       res.end(
         JSON.stringify({
@@ -24,10 +28,14 @@ export default async (req, res) => {
     }
 
     const yarn = execa('yarn', {
-      cwd: './app'
+      cwd: `./app/${name}`
     });
     yarn.stdout.pipe(process.stdout);
     await yarn;
+
+    config.set('app', name);
+    config.save();
+    loadProject(name);
 
     res.end(
       JSON.stringify({

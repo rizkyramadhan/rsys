@@ -39,7 +39,8 @@ const color = {
   warning: "#FBAA00",
   danger: "#F83D71",
   info: "#2995FF",
-  basic: "#F7F9FC"
+  basic: "#F7F9FC",
+  dark: "#1a2138"
 };
 
 export const mode = {

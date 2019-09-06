@@ -39,7 +39,7 @@ export default observer(({ state, callback }: any) => {
       state.value.props = v;
       callback(state.value);
     };
-  });
+  }, []);
   return (
     <div
       style={{
@@ -47,30 +47,6 @@ export default observer(({ state, callback }: any) => {
         flexDirection: "column"
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
-        }}
-      >
-        <Label
-          className='rsys-at-label'
-          style={{
-            fontSize: "12px",
-            display: "flex",
-            alignItems: "center"
-          }}
-        >
-          Name
-        </Label>
-        <TextField
-          styles={inputStyle}
-          value={state.value.name}
-          onChange={e => change(e, "name")}
-        />
-      </div>
       <div
         style={{
           display: "flex",
@@ -98,7 +74,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",
@@ -119,6 +95,51 @@ export default observer(({ state, callback }: any) => {
           defaultSelectedKey="none"
           onChange={(_e, item) => {
             changeSelect(item.key, "status");
+          }}
+          onRenderCaretDown={() => <Icon iconName="CaretDownSolid8" />}
+          styles={dropdownStyles}
+          style={dropdownStyle}
+        />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          margin: "0 10px 5px",
+          alignItems: "stretch"
+        }}
+      >
+        <Label
+          style={{
+            width: "25%",
+            fontSize: "12px",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          Heading
+        </Label>
+        <Dropdown
+          options={[
+            { key: "none", text: "None" },
+            { key: "h1", text: "H1" },
+            { key: "h2", text: "H2" },
+            { key: "h3", text: "H3" },
+            { key: "h4", text: "H4" },
+            { key: "h5", text: "H5" },
+            { key: "h6", text: "H6" },
+            { key: "h6", text: "S1" },
+            { key: "h6", text: "S2" },
+            { key: "p1", text: "P1" },
+            { key: "p2", text: "P2" },
+            { key: "c1", text: "C1" },
+            { key: "c2", text: "C2" },
+            { key: "Label", text: "Label" }
+          ]}
+          defaultSelectedKey="none"
+          onChange={(_e, item) => {
+            changeSelect(item.key, "category");
           }}
           onRenderCaretDown={() => <Icon iconName="CaretDownSolid8" />}
           styles={dropdownStyles}

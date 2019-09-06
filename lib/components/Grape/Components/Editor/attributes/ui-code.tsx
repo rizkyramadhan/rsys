@@ -1,15 +1,7 @@
-import { observer } from "mobx-react-lite";
-import {
-  Dropdown,
-  Icon,
-  Label,
-  TextField,
-  Checkbox
-} from "office-ui-fabric-react";
-import React, { useEffect } from "react";
-import { dropdownStyle, dropdownStyles, inputStyle, checkboxStyle } from "..";
-import CodeBlock from "../components/code-block";
 import { observable } from "mobx";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
+import CodeBlock from "../components/code-block";
 
 const configProps = observable({
   showModal: false,
@@ -26,7 +18,7 @@ export default observer(({ state, callback }: any) => {
       state.value.props = v;
       callback(state.value);
     };
-  });
+  }, []);
   return (
     <div
       style={{

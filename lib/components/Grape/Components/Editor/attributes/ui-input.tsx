@@ -11,13 +11,6 @@ import { dropdownStyle, dropdownStyles, inputStyle, checkboxStyle } from "..";
 import CodeBlock from "../components/code-block";
 import { observable } from "mobx";
 
-const configCode = observable({
-  showModal: false,
-  keyid: "inpAttr",
-  label: "Text",
-  value: null,
-  callback: null
-});
 const configProps = observable({
   showModal: false,
   keyid: "inpProps",
@@ -35,17 +28,12 @@ export default observer(({ state, callback }: any) => {
     callback(state.value);
   };
   useEffect(() => {
-    configCode.value = state.value.text;
-    configCode.callback = v => {
-      state.value.text = v;
-      callback(state.value);
-    };
     configProps.value = state.value.props;
     configProps.callback = v => {
       state.value.props = v;
       callback(state.value);
     };
-  });
+  }, []);
   return (
     <div
       style={{
@@ -62,31 +50,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
-          style={{
-            fontSize: "12px",
-            display: "flex",
-            alignItems: "center"
-          }}
-        >
-          Name
-        </Label>
-        <TextField
-          styles={inputStyle}
-          value={state.value.name}
-          onChange={e => change(e, "name")}
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "0 10px 5px",
-          alignItems: "stretch"
-        }}
-      >
-        <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",
@@ -110,7 +74,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",
@@ -132,15 +96,6 @@ export default observer(({ state, callback }: any) => {
           alignItems: "stretch"
         }}
       >
-        <CodeBlock state={configCode} />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "stretch"
-        }}
-      >
         <CodeBlock state={configProps} />
       </div>
       <div
@@ -152,7 +107,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",
@@ -186,7 +141,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",
@@ -222,7 +177,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",
@@ -253,7 +208,7 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
-          className='rsys-at-label'
+          className="rsys-at-label"
           style={{
             fontSize: "12px",
             display: "flex",

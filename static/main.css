@@ -48,6 +48,20 @@
   flex: 1;
 }
 
+.gjs-trt-trait .ms-Button {
+  height: 26px !important;
+}
+.rsys-attr .ms-Button .ms-Icon,
+.rsys-attr .ms-Button .ms-Icon svg {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.gjs-trt-trait .ms-Button-label {
+  font-size: 13px !important;
+}
+
 .gjs-field-wrp--attributes .ms-Label {
   margin-top: 0 !important;
   padding-top: 0 !important;
@@ -56,4 +70,9 @@
 
 .ms-Dropdown-title {
   font-size: 12px !important;
+}
+
+.rsys-at-label {
+  width: 50px !important;
+  margin-right: 5px !important;
 }

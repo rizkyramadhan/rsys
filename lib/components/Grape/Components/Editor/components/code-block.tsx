@@ -32,8 +32,8 @@ export default observer((props: any) => {
       }}
     >
       <div
+          className='rsys-at-label'
         style={{
-          width: "25%",
           display: "flex",
           flexDirection: "row",
           alignItems: "stretch",

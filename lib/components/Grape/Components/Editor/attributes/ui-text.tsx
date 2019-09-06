@@ -56,8 +56,8 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
+          className='rsys-at-label'
           style={{
-            width: "25%",
             fontSize: "12px",
             display: "flex",
             alignItems: "center"
@@ -98,8 +98,8 @@ export default observer(({ state, callback }: any) => {
         }}
       >
         <Label
+          className='rsys-at-label'
           style={{
-            width: "25%",
             fontSize: "12px",
             display: "flex",
             alignItems: "center"

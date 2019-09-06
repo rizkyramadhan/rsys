@@ -8,6 +8,7 @@ import { Label } from 'office-ui-fabric-react';
 export default observer((props: any) => {
   return (
     <div
+      className='rsys-attr'
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -23,8 +24,8 @@ export default observer((props: any) => {
         }}
       >
         <Label
+          className='rsys-at-label'
           style={{
-            width: '25%',
             display: 'flex',
             marginRight: 10,
             fontSize: '12px',
@@ -44,8 +45,8 @@ export default observer((props: any) => {
         }}
       >
         <Label
+          className='rsys-at-label'
           style={{
-            width: '25%',
             fontSize: '12px',
             marginRight: 10,
             display: 'flex',
@@ -65,8 +66,8 @@ export default observer((props: any) => {
         }}
       >
         <Label
+          className='rsys-at-label'
           style={{
-            width: '25%',
             fontSize: '12px',
             marginRight: 10,
             display: 'flex',

@@ -43,7 +43,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "row-reverse"
+          iconName: "rowReverse"
         }}
         title="Horizontal Reverse"
         ariaLabel="Horizontal Reverse"

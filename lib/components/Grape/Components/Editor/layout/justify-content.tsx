@@ -20,7 +20,7 @@ export default observer(({ state, callback }: any) => {
     >
       <IconButton
         iconProps={{
-          iconName: "justify-start"
+          iconName: "justifyStart"
         }}
         title="Flex Start"
         ariaLabel="Flex Start"
@@ -31,7 +31,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "justify-center"
+          iconName: "justifyCenter"
         }}
         title="Center"
         ariaLabel="Center"
@@ -42,7 +42,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "justify-end"
+          iconName: "justifyEnd"
         }}
         title="Flex End"
         ariaLabel="Flex End"
@@ -53,7 +53,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "justify-between"
+          iconName: "justifyBetween"
         }}
         title="Space Between"
         ariaLabel="Space Between"
@@ -64,7 +64,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "justify-around"
+          iconName: "justifyAround"
         }}
         title="Space Around"
         ariaLabel="Space Around"

@@ -5,6 +5,7 @@ import UIButton from "./ui-button";
 import UICode from "./ui-code";
 import UIInput from "./ui-input";
 import UILayout from "./ui-layout";
+import UIComponent from "./ui-layout";
 
 export default observer((props: any) => {
   const type = props.state.type;
@@ -23,7 +24,8 @@ export default observer((props: any) => {
           "button-ui": <UIButton {...props} />,
           "code-ui": <UICode {...props} />,
           "input-ui": <UIInput {...props} />,
-          "layout-ui": <UILayout {...props} />
+          "layout-ui": <UILayout {...props} />,
+          "component-ui": <UIComponent {...props} />
         }[type]
       }
     </div>

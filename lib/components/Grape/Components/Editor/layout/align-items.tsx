@@ -21,7 +21,7 @@ export default observer(({ state, callback }: any) => {
     >
       <IconButton
         iconProps={{
-          iconName: "align-start"
+          iconName: "alignStart"
         }}
         title="Flex Start"
         ariaLabel="Flex Start"
@@ -32,7 +32,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "align-center"
+          iconName: "alignCenter"
         }}
         title="Center"
         ariaLabel="Center"
@@ -43,7 +43,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "align-end"
+          iconName: "alignEnd"
         }}
         title="Flex End"
         ariaLabel="Flex End"
@@ -54,7 +54,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "align-between"
+          iconName: "alignBetween"
         }}
         title="Stretch"
         ariaLabel="Stretch"
@@ -65,7 +65,7 @@ export default observer(({ state, callback }: any) => {
       />
       <IconButton
         iconProps={{
-          iconName: "align-around"
+          iconName: "alignAround"
         }}
         title="Baseline"
         ariaLabel="Baseline"

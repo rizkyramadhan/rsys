@@ -7,6 +7,7 @@ import Layout from "./layout/index";
 import Spacing from "./spacing/index";
 import Size from "./size/index";
 import Background from "./background/index";
+import Borders from "./borders/index";
 
 const caretAcv = { iconName: "CaretSolidDown" };
 const caretInAcv = { iconName: "CaretSolidRight" };
@@ -14,7 +15,8 @@ const state = observable({
   layout: true,
   spacing: true,
   size: true,
-  background: true
+  background: true,
+  borders: true
 });
 export default observer((props: any) => {
   return (
@@ -106,13 +108,33 @@ export default observer((props: any) => {
         />
         {state.background && <Background {...props} />}
       </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch"
+        }}
+      >
+        <DefaultButton
+          toggle
+          checked={state.borders}
+          text={"Borders"}
+          iconProps={state.borders ? caretAcv : caretInAcv}
+          onClick={() => {
+            state.borders = !state.borders;
+          }}
+          allowDisabledFocus
+          styles={groupNameStyles}
+        />
+        {state.borders && <Borders {...props} />}
+      </div>
     </div>
   );
 });
 
 registerIcons({
   icons: {
-    "align-start": (
+    alignStart: (
       <svg
         data-icon="align-items-start-column"
         aria-hidden="true"
@@ -131,7 +153,7 @@ registerIcons({
         <path fill="currentColor" d="M0 0h1v16H0z"></path>
       </svg>
     ),
-    "align-center": (
+    alignCenter: (
       <svg
         data-icon="align-items-center-column"
         aria-hidden="true"
@@ -150,7 +172,7 @@ registerIcons({
         <path fill="currentColor" d="M7 0h1v16H7z"></path>
       </svg>
     ),
-    "align-end": (
+    alignEnd: (
       <svg
         data-icon="align-items-end-column"
         aria-hidden="true"
@@ -169,7 +191,7 @@ registerIcons({
         <path fill="currentColor" d="M15 0h1v16h-1z"></path>
       </svg>
     ),
-    "align-between": (
+    alignBetween: (
       <svg
         data-icon="align-items-stretch-column"
         aria-hidden="true"
@@ -188,7 +210,7 @@ registerIcons({
         <path fill="currentColor" d="M0 0h1v16H0zm15 0h1v16h-1z"></path>
       </svg>
     ),
-    "align-around": (
+    alignAround: (
       <svg
         data-icon="align-items-start-column"
         aria-hidden="true"
@@ -226,7 +248,7 @@ registerIcons({
         <path d="M9 3h2l-3-3-3 3h2v10h-2l3 3 3-3h-2z"></path>
       </svg>
     ),
-    "row-reverse": (
+    rowReverse: (
       <svg
         data-icon="arrow-reverse"
         aria-hidden="true"
@@ -243,7 +265,7 @@ registerIcons({
         ></path>
       </svg>
     ),
-    "justify-start": (
+    justifyStart: (
       <svg
         data-icon="justify-content-start-column"
         aria-hidden="true"
@@ -262,7 +284,7 @@ registerIcons({
         <path fill="currentColor" d="M0 0h16v1H0z"></path>
       </svg>
     ),
-    "justify-center": (
+    justifyCenter: (
       <svg
         data-icon="justify-content-center-column"
         aria-hidden="true"
@@ -279,7 +301,7 @@ registerIcons({
         <path fill="currentColor" d="M0 7h16v1H0z"></path>
       </svg>
     ),
-    "justify-end": (
+    justifyEnd: (
       <svg
         data-icon="justify-content-end-column"
         aria-hidden="true"
@@ -298,7 +320,7 @@ registerIcons({
         <path fill="currentColor" d="M0 15h16v1H0z"></path>
       </svg>
     ),
-    "justify-between": (
+    justifyBetween: (
       <svg
         data-icon="justify-content-space-between-column"
         aria-hidden="true"
@@ -317,7 +339,7 @@ registerIcons({
         <path fill="currentColor" d="M0 0h16v1H0zm0 15h16v1H0z"></path>
       </svg>
     ),
-    "justify-around": (
+    justifyAround: (
       <svg
         data-icon="justify-content-space-around-column"
         aria-hidden="true"
@@ -413,6 +435,345 @@ registerIcons({
           d="M10 4h2v8h-2l3 3 3-3h-2V4h2l-3-3-3 3z"
           fill="currentColor"
         ></path>
+      </svg>
+    ),
+    radiusSingle: (
+      <svg
+        data-icon="border-radius-single"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5 2a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3H5zm0 2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H5z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    radiusMultiple: (
+      <svg
+        data-icon="border-radius-multiple"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5 2a3 3 0 0 0-3 3v2h2V5a1 1 0 0 1 1-1h2V2H5zm6 0a3 3 0 0 1 3 3v2h-2V5a1 1 0 0 0-1-1H9V2h2zM5 14a3 3 0 0 1-3-3V9h2v2a1 1 0 0 0 1 1h2v2H5zm6 0a3 3 0 0 0 3-3V9h-2v2a1 1 0 0 1-1 1H9v2h2z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    cross: (
+      <svg
+        data-icon="cross"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M9.414 8l3.293-3.293-1.414-1.414L8 6.586 4.707 3.293 3.293 4.707 6.586 8l-3.293 3.293 1.414 1.414L8 9.414l3.293 3.293 1.414-1.414L9.414 8z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    borderSolid: (
+      <svg
+        data-icon="border-style-solid"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path fill="currentColor" d="M1 7h14v2H1z"></path>
+      </svg>
+    ),
+    borderDashed: (
+      <svg
+        data-icon="border-style-dashed"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path fill="currentColor" d="M0 7h4v2H0zm6 0h4v2H6zm6 0h4v2h-4z"></path>
+      </svg>
+    ),
+    borderDotted: (
+      <svg
+        data-icon="border-style-dotted"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          fill="currentColor"
+          d="M1 7h2v2H1zm4 0h2v2H5zm4 0h2v2H9zm4 0h2v2h-2z"
+        ></path>
+      </svg>
+    ),
+    radiusTopLeft: (
+      <svg
+        data-icon="border-radius-topleft"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M9 2h5v5h-2V4H9V2zm3 7h2v5H9v-2h3V9zM2 14V9h2v3h3v2H2z"
+          fill="currentColor"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5 2a3 3 0 0 0-3 3v2h2V5a1 1 0 0 1 1-1h2V2H5z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    radiusTopRight: (
+      <svg
+        data-icon="border-radius-topright"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M14 9v5H9v-2h3V9h2zm-7 3v2H2V9h2v3h3zM2 2h5v2H4v3H2V2z"
+          fill="currentColor"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M14 5a3 3 0 0 0-3-3H9v2h2a1 1 0 0 1 1 1v2h2V5z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    radiusBottomLeft: (
+      <svg
+        data-icon="border-radius-bottomleft"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M2 7V2h5v2H4v3H2zm7-3V2h5v5h-2V4H9zm5 10H9v-2h3V9h2v5z"
+          fill="currentColor"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M2 11a3 3 0 0 0 3 3h2v-2H5a1 1 0 0 1-1-1V9H2v2z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    radiusBottomRight: (
+      <svg
+        data-icon="border-radius-bottomright"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M7 14H2V9h2v3h3v2zM4 7H2V2h5v2H4v3zm10-5v5h-2V4H9V2h5z"
+          fill="currentColor"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M11 14a3 3 0 0 0 3-3V9h-2v2a1 1 0 0 1-1 1H9v2h2z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    borderTop: (
+      <svg
+        data-icon="border-top"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 5v7H4V5H2v9h12V5h-2z"
+          fill="currentColor"
+        ></path>
+        <path fill="currentColor" d="M14 2v2H2V2z"></path>
+      </svg>
+    ),
+    borderLeft: (
+      <svg
+        data-icon="border-left"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5 4h7v8H5v2h9V2H5v2z"
+          fill="currentColor"
+        ></path>
+        <path fill="currentColor" d="M2 2h2v12H2z"></path>
+      </svg>
+    ),
+    borderAll: (
+      <svg
+        data-icon="border-all"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M14 2H2v12h12V2zm-2 2H4v8h8V4z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+    borderRight: (
+      <svg
+        data-icon="border-right"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M11 4H4v8h7v2H2V2h9v2z"
+          fill="currentColor"
+        ></path>
+        <path fill="currentColor" d="M14 2h-2v12h2z"></path>
+      </svg>
+    ),
+    borderBottom: (
+      <svg
+        data-icon="border-bottom"
+        aria-hidden="true"
+        focusable="false"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        className="bem-Svg"
+        style={{
+          transform: "translate(0px, 0px)"
+        }}
+      >
+        <path
+          opacity=".4"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M4 11V4h8v7h2V2H2v9h2z"
+          fill="currentColor"
+        ></path>
+        <path fill="currentColor" d="M2 14v-2h12v2z"></path>
       </svg>
     )
   }
